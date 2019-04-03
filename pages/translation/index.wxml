@@ -1,0 +1,18 @@
+<view class="row">
+  <van-button type="info" size='large' class="demo-margin-right">翻译</van-button>
+</view>
+<van-row >
+    <van-col span="3" offset="1">
+      <van-icon name="comment-o" size="40px" bind:click="onClickIcon"/>
+    </van-col>
+    <van-col span="20">
+      <van-field input-align="center" value="{{ value }}" placeholder="查单词或翻译句子" border="{{ false }}" clearable use-button-slot="true" adjust-position="true" icon="question-o" bind:click-icon="onClickIcon">
+        <!-- <van-button slot="button" size="small" type="primary" custom-class="button" bind:tap="onSendSms">发送验证码</van-button> -->
+      </van-field>
+    </van-col>
+</van-row>
+<!-- <van-cell-group>
+    <van-field input-align="center" value="{{ value }}" placeholder="查单词或翻译句子" border="{{ false }}" clearable use-button-slot="true" adjust-position="true">
+      <van-button slot="button" size="small" type="primary" custom-class="button" bind:tap="onSendSms">发送验证码</van-button>
+    </van-field>
+</van-cell-group> --> 
