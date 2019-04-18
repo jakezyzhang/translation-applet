@@ -1,34 +1,36 @@
-const app = getApp()
-
+// pages/person/person.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    multiArray: [
-      ['中', '英', '法', '日', '韩'],
-      ['中', '英', '法', '日', '韩']
-    ],
-    multiIndex: [0, 0, 0],
     active: 0,
-    show: {
-      middle: false
-    }
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    nickName: undefined
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options.active);
-    let isIphoneX = app.globalData.isIphoneX;
+    console.log(options.active)
     this.setData({
-      isIphoneX: isIphoneX,
       active: options.active
     })
-
-
+    // 查看是否授权
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          wx.getUserInfo({
+            success(res) {
+              console.log(res.userInfo)
+            }
+          })
+        }
+      }
+    })
   },
 
   /**
@@ -79,31 +81,6 @@ Page({
   onShareAppMessage: function() {
 
   },
-  toggle(type) {
-    this.setData({
-      [`show.${type}`]: !this.data.show[type]
-    });
-  },
-  onClickIcon() {
-    this.toggle('middle');
-  },
-  bindMultiPickerChange(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      multiIndex: e.detail.value
-    })
-  },
-  bindMultiPickerColumnChange(e) {
-    console.log('修改的列为', e.detail.column, '，值为', e.detail.value)
-    const data = {
-      multiArray: this.data.multiArray,
-      multiIndex: this.data.multiIndex
-    }
-    data.multiIndex[e.detail.column] = e.detail.value
-    data.multiArray[1] = ['中', '英', '法', '日', '韩']
-    console.log(data.multiIndex)
-    this.setData(data)
-  },
   onChange(event) {
     console.log(event.detail);
     if (event.detail == 0) {
@@ -122,5 +99,11 @@ Page({
         url: '../list/list?active=' + event.detail,
       })
     }
+  },
+  bindGetUserInfo(e) {
+    console.log(e.detail.userInfo)
+    this.setData({
+      nickName: e.detail.userInfo.nickName
+    })
   }
 })

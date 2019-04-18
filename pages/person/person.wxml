@@ -1,0 +1,26 @@
+<!--pages/person/person.wxml-->
+<!-- 需要使用 button 来授权登录 -->
+<button
+  wx:if="{{canIUse}}"
+  open-type="getUserInfo"
+  bindgetuserinfo="bindGetUserInfo"
+>
+  授权登录
+</button>
+<text>{{nickName}}</text>
+
+<view>
+  <van-tabbar active="{{ active }}" safe-area-inset-bottom="false" bind:change="onChange">
+    <van-tabbar-item >
+      <image slot="icon" src="../../package/icons/translation3.png" mode="aspectFit" />
+      <image slot="icon-active" src="../../package/icons/translation4.png" mode="aspectFit" /> 自定义
+    </van-tabbar-item>
+    <van-tabbar-item>
+      <image slot="icon" src="../../package/icons/earth.png" mode="aspectFit" />
+      <image slot="icon-active" src="../../package/icons/earth2.png" mode="aspectFit" /> 自定义</van-tabbar-item>
+    <van-tabbar-item>
+      <image slot="icon" src="../../package/icons/user.png" mode="aspectFit" bindload=''/>
+      <image slot="icon-active" src="../../package/icons/user2.png" mode="aspectFit" /> 自定义
+    </van-tabbar-item>
+  </van-tabbar>
+</view>

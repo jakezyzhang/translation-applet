@@ -1,3 +1,6 @@
+@import "colorui/main.wxss";
+@import "colorui/icon.wxss";
+
 page {
   color: #333;
   font-size: 16px;

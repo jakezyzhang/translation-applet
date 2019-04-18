@@ -1,15 +1,23 @@
 {
   "pages": [
-    "pages/translation/index"
+    "pages/translation/index",
+    "pages/question/question",
+    "pages/person/person",
+    "pages/news/news",
+    "pages/list/list"
   ],
-  
   "usingComponents": {
     "van-button": "../../dist/button/index",
     "van-icon": "../../dist/icon/index",
     "van-field": "../../dist/field/index",
     "van-cell-group": "../../dist/cell-group/index",
     "van-row": "../../dist/row/index",
-    "van-col": "../../dist/col/index"
+    "van-col": "../../dist/col/index",
+    "van-popup": "../../dist/popup/index",
+    "van-dialog": "../../dist/dialog/index",
+    "van-tabbar": "../../dist/tabbar/index",
+    "van-tabbar-item": "../../dist/tabbar-item/index",
+    "van-transition": "../../dist/transition/index"
   },
   "window": {
     "backgroundTextStyle": "light",

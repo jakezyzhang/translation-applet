@@ -1,18 +1,47 @@
-<view class="row">
-  <van-button type="info" size='large' class="demo-margin-right">翻译</van-button>
-</view>
-<van-row >
-    <van-col span="3" offset="1">
-      <van-icon name="comment-o" size="40px" bind:click="onClickIcon"/>
+<!-- 输出框 -->
+<view>
+  <van-row>
+    <van-col span="5" offset="0">
+      <view class="section">
+        <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+          <view class="picker">
+            <van-row>
+              <van-col span="8">{{multiArray[0][multiIndex[0]]}}</van-col>
+              <van-col span="8">
+                <image class='translation' src='../../package/icons/translation2.png' mode='aspectFit' />
+              </van-col>
+              <van-col span="8">{{multiArray[1][multiIndex[1]]}}</van-col>
+            </van-row>
+          </view>
+        </picker>
+      </view>
     </van-col>
-    <van-col span="20">
+    <van-col span="19">
       <van-field input-align="center" value="{{ value }}" placeholder="查单词或翻译句子" border="{{ false }}" clearable use-button-slot="true" adjust-position="true" icon="question-o" bind:click-icon="onClickIcon">
-        <!-- <van-button slot="button" size="small" type="primary" custom-class="button" bind:tap="onSendSms">发送验证码</van-button> -->
       </van-field>
+      <van-popup show="{{ show.middle }}" custom-class="center" overlay="false" transition="none" bind:close="onClickIcon">
+        内容
+      </van-popup>
     </van-col>
-</van-row>
-<!-- <van-cell-group>
-    <van-field input-align="center" value="{{ value }}" placeholder="查单词或翻译句子" border="{{ false }}" clearable use-button-slot="true" adjust-position="true">
-      <van-button slot="button" size="small" type="primary" custom-class="button" bind:tap="onSendSms">发送验证码</van-button>
-    </van-field>
-</van-cell-group> --> 
+  </van-row>
+</view>
+<!-- 翻译按钮 -->
+<view class="{{isIphoneX?'isIPX':'row'}}">
+  <van-button type="info" size='large' round custom-class="demo-margin-bottom">翻译</van-button>
+</view>
+<!-- tabbar标签栏 -->
+<view>
+  <van-tabbar active="{{ active }}" safe-area-inset-bottom="false" bind:change="onChange">
+    <van-tabbar-item>
+      <image slot="icon" src="../../package/icons/translation3.png" mode="aspectFit" />
+      <image slot="icon-active" src="../../package/icons/translation4.png" mode="aspectFit" /> 自定义
+    </van-tabbar-item>
+    <van-tabbar-item>
+      <image slot="icon" src="../../package/icons/earth.png" mode="aspectFit" />
+      <image slot="icon-active" src="../../package/icons/earth2.png" mode="aspectFit" /> 自定义</van-tabbar-item>
+    <van-tabbar-item>
+      <image slot="icon" src="../../package/icons/user.png" mode="aspectFit" bindload='' />
+      <image slot="icon-active" src="../../package/icons/user2.png" mode="aspectFit" /> 自定义
+    </van-tabbar-item>
+  </van-tabbar>
+</view>
