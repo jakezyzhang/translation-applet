@@ -2,7 +2,8 @@ const app = getApp();
 Page({
   data: {
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    active: 0,
   },
   showModal(e) {
     this.setData({
@@ -14,29 +15,32 @@ Page({
       modalName: null
     })
   },
-  menuBorder: function (e) {
+  menuBorder: function(e) {
     this.setData({
       menuBorder: e.detail.value
     });
   },
-  menuArrow: function (e) {
+  menuArrow: function(e) {
     this.setData({
       menuArrow: e.detail.value
     });
   },
-  menuCard: function (e) {
+  menuCard: function(e) {
     this.setData({
       menuCard: e.detail.value
     });
   },
-  onLoad: function () {
+  onLoad: function(options) {
+    this.setData({
+      active: options.active
+    })
     var that = this;
     // 查看是否授权
     wx.getSetting({
-      success: function (res) {
+      success: function(res) {
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
-            success: function (res) {
+            success: function(res) {
               //从数据库获取用户信息
               that.queryUsreInfo();
               //用户已经授权过
@@ -49,7 +53,7 @@ Page({
       }
     })
   },
-  bindGetUserInfo: function (e) {
+  bindGetUserInfo: function(e) {
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
       var that = this;
@@ -68,7 +72,7 @@ Page({
         header: {
           'content-type': 'application/json'
         },
-        success: function (res) {
+        success: function(res) {
           //从数据库获取用户信息
           // that.queryUsreInfo();
           console.log("插入小程序登录用户信息成功！");
@@ -85,7 +89,7 @@ Page({
         content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
         showCancel: false,
         confirmText: '返回授权',
-        success: function (res) {
+        success: function(res) {
           if (res.confirm) {
             console.log('用户点击了“返回授权”')
           }
@@ -94,7 +98,7 @@ Page({
     }
   },
   //获取用户信息接口
-  queryUsreInfo: function () {
+  queryUsreInfo: function() {
     wx.request({
       url: app.globalData.urlPath + 'user/userInfo',
       data: {
@@ -103,9 +107,29 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      success: function (res) {
+      success: function(res) {
         app.globalData.userInfo = res.data;
       }
     });
+  },
+
+  onChange(event) {
+    console.log(event.detail);
+    if (event.detail == 0) {
+      wx.redirectTo({
+        url: '../translation/index?active=' + event.detail,
+      })
+    }
+    if (event.detail == 1) {
+      wx.redirectTo({
+        url: '../news/news?active=' + event.detail,
+      })
+
+    }
+    if (event.detail == 2) {
+      wx.redirectTo({
+        url: '../list/list?active=' + event.detail,
+      })
+    }
   },
 })

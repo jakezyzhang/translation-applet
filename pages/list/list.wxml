@@ -7,7 +7,6 @@
     </view>
     <view class="flex-sub  padding-sm margin-xs radius">
       <view class="padding">
-
         <view class="cu-avatar xl round margin-left" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view>
       </view>
     </view>
@@ -34,9 +33,9 @@
       </navigator>
     </view>
     <view class="cu-item {{menuArrow?'arrow':''}}">
-      <button class="cu-btn content" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
+      <button class="cu-btn content" open-type="contact">
         <text class="icon-btn text-olive"></text>
-        <text class="text-grey">Open-type 按钮</text>
+        <text class="text-grey">联系客服</text>
       </button>
     </view>
   </view>

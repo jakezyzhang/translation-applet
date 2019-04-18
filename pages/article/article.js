@@ -1,24 +1,18 @@
-// pages/news/news.js
-// var base64 = require("../../images/base64");
+// pages/article/article.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    active:0
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.active);
-    this.setData({
-      active: options.active,
-      icon20: '../../package/icons/carton.png',
-      icon60: '../../package/icons/carton.png'
-    })
+
   },
 
   /**
@@ -68,24 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  onChange(event) {
-    console.log(event.detail);
-    if (event.detail == 0) {
-      wx.redirectTo({
-        url: '../translation/index?active=' + event.detail,
-      })
-    }
-    if (event.detail == 1) {
-      wx.redirectTo({
-        url: '../news/news?active=' + event.detail,
-      })
-
-    }
-    if (event.detail == 2) {
-      wx.redirectTo({
-        url: '../list/list?active=' + event.detail,
-      })
-    }
   }
 })
