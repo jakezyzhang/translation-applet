@@ -1,115 +1,37 @@
-<scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
+<view class="padding bg-white">
+  <view class="flex">
+    <view class="flex-sub  padding-sm margin-xs radius">
+      <button class="login-btn bg-white" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
+        <text class="">登录/注册</text>
+      </button>
+    </view>
+    <view class="flex-sub  padding-sm margin-xs radius">
+      <view class="padding">
 
-  <view class="cu-modal {{modalName=='menuModal'?'show':''}}" bindtap="hideModal">
-    <view class="cu-dialog" catchtap>
-      <scroll-view scroll-y style="height:300rpx">
-        <view class="cu-list menu text-left solid-top">
-          <view class="cu-item">
-            <view class="content">
-              <text class="text-grey">短边框</text>
-            </view>
-            <view class="action">
-              <switch bindchange="menuBorder"></switch>
-            </view>
-          </view>
-          <view class="cu-item">
-            <view class="content">
-              <text class="text-grey">箭头</text>
-            </view>
-            <view class="action">
-              <switch bindchange="menuArrow"></switch>
-            </view>
-          </view>
-          <view class="cu-item">
-            <view class="content">
-              <text class="text-grey">卡片</text>
-            </view>
-            <view class="action">
-              <switch bindchange="menuCard"></switch>
-            </view>
-          </view>
-          <view class="cu-item">
-            <view class="content">
-              <text class="text-grey">短边框</text>
-            </view>
-            <view class="action">
-              <switch bindchange="menuBorder"></switch>
-            </view>
-          </view>
-          <view class="cu-item">
-            <view class="content">
-              <text class="text-grey">箭头</text>
-            </view>
-            <view class="action">
-              <switch bindchange="menuArrow"></switch>
-            </view>
-          </view>
-          <view class="cu-item">
-            <view class="content">
-              <text class="text-grey">卡片</text>
-            </view>
-            <view class="action">
-              <switch bindchange="menuCard"></switch>
-            </view>
-          </view>
-        </view>
-      </scroll-view>
+        <view class="cu-avatar xl round margin-left" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view>
+      </view>
     </view>
   </view>
+</view>
+<scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
   <view class="cu-list menu {{menuBorder?'sm-border':''}} {{menuCard?'card-menu margin-top':''}}">
-    <view class="cu-item {{menuArrow?'arrow':''}}">
+    <view class="cu-item {{menuCard?'arrow':''}}">
       <view class="content">
-        <text class="icon-circlefill text-grey"></text>
-        <text class="text-grey">图标 + 标题</text>
+        <image src="/package/icons/collection.png" class="png" mode="aspectFit"></image>
+        <text class="text-grey">收藏单词</text>
       </view>
     </view>
     <view class="cu-item {{menuArrow?'arrow':''}}">
       <view class="content">
-        <image src="/images/logo.png" class="png" mode="aspectFit"></image>
-        <text class="text-grey">图片 + 标题</text>
+        <image src="/package/icons/record.png" class="png" mode="aspectFit"></image>
+        <text class="text-grey">翻译记录</text>
       </view>
     </view>
     <view class="cu-item {{menuArrow?'arrow':''}}">
-      <navigator class="content" hover-class="none" url="../list/list" open-type="redirect">
-        <text class="icon-discoverfill text-orange"></text>
-        <text class="text-grey">Navigator 跳转</text>
+      <navigator class="content" hover-class="none" url="../translation/index" open-type="redirect">
+        <image src="/package/icons/browse.png" class="png" mode="aspectFit"></image>
+        <text class="text-grey">最近浏览</text>
       </navigator>
-    </view>
-    <view class="cu-item {{menuArrow?'arrow':''}}">
-      <view class="content">
-        <text class="icon-emojiflashfill text-pink"></text>
-        <text class="text-grey">头像组</text>
-      </view>
-      <view class="action">
-        <view class="cu-avatar-group">
-          <view class="cu-avatar round sm" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10004.jpg);"></view>
-          <view class="cu-avatar round sm" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10003.jpg);"></view>
-          <view class="cu-avatar round sm" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10002.jpg);"></view>
-          <view class="cu-avatar round sm" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
-        </view>
-        <text class="text-grey text-sm">4 人</text>
-      </view>
-    </view>
-    <view class="cu-item {{menuArrow?'arrow':''}}">
-      <view class="content">
-        <text class="icon-btn text-green"></text>
-        <text class="text-grey">按钮</text>
-      </view>
-      <view class="action">
-        <button class="cu-btn round bg-green shadow">
-          <text class="icon-upload"></text> 上传</button>
-      </view>
-    </view>
-    <view class="cu-item {{menuArrow?'arrow':''}}">
-      <view class="content">
-        <text class="icon-tagfill text-red"></text>
-        <text class="text-grey">标签</text>
-      </view>
-      <view class="action">
-        <view class="cu-tag round bg-orange light">音乐</view>
-        <view class="cu-tag round bg-olive light">电影</view>
-        <view class="cu-tag round bg-blue light">旅行</view>
-      </view>
     </view>
     <view class="cu-item {{menuArrow?'arrow':''}}">
       <button class="cu-btn content" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
@@ -119,3 +41,19 @@
     </view>
   </view>
 </scroll-view>
+
+<view>
+  <van-tabbar active="{{ active }}" safe-area-inset-bottom="false" bind:change="onChange">
+    <van-tabbar-item>
+      <image slot="icon" src="../../package/icons/translation3.png" mode="aspectFit" />
+      <image slot="icon-active" src="../../package/icons/translation4.png" mode="aspectFit" /> 自定义
+    </van-tabbar-item>
+    <van-tabbar-item>
+      <image slot="icon" src="../../package/icons/earth.png" mode="aspectFit" />
+      <image slot="icon-active" src="../../package/icons/earth2.png" mode="aspectFit" /> 自定义</van-tabbar-item>
+    <van-tabbar-item>
+      <image slot="icon" src="../../package/icons/user.png" mode="aspectFit" bindload='' />
+      <image slot="icon-active" src="../../package/icons/user2.png" mode="aspectFit" /> 自定义
+    </van-tabbar-item>
+  </van-tabbar>
+</view>

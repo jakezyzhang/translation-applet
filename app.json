@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/list/list",
     "pages/translation/index",
     "pages/question/question",
     "pages/person/person",
-    "pages/news/news",
-    "pages/list/list"
+    "pages/news/news"
+    
   ],
   "usingComponents": {
     "van-button": "../../dist/button/index",

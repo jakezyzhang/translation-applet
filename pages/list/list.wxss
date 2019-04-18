@@ -23,3 +23,7 @@
   content: "\e6db";
 }
 
+.login-btn::after {
+  border: none;
+}
+
