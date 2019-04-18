@@ -2,12 +2,13 @@
   <view class="flex">
     <view class="flex-sub  padding-sm margin-xs radius">
       <button class="login-btn bg-white" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
-        <text class="">登录/注册</text>
+        <text class="">{{nickName}}</text>
       </button>
     </view>
     <view class="flex-sub  padding-sm margin-xs radius">
       <view class="padding">
-        <view class="cu-avatar xl round margin-left" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view>
+        <!-- <view class="cu-avatar xl round margin-left" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view> -->
+        <image class="cu-avatar xl round margin-left" src='{{avatarUrl}}'></image>
       </view>
     </view>
   </view>
