@@ -4,9 +4,9 @@ package com.zzy.translation.api;
 
 public class Main {
     public static void main(String[] args) {
-        String query = "你好";
+        String query = "hello";
         String from = "auto";
-        String to = "en";
+        String to = "zh";
 
 
         System.out.println(HttpGet.get(query, from, to));

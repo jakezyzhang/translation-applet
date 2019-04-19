@@ -23,7 +23,7 @@ public class HttpGet {
             sslContext.init(null, new TrustManager[]{ myX509TrustManager }, null);
 
             String sendUrl = TransApi.getTransResult(query, from, to);
-
+            System.out.println(sendUrl);
             URL url = new URL(sendUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             if(conn instanceof HttpsURLConnection){

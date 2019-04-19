@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzy.translation.dao.WxUserDao">
+    <insert id="insertWxUser" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.zzy.translation.entity.WxUser">
+        INSERT INTO
+        tb_wxuser(user_id, open_id,
+        nick_name, avatar_url, city, country, gender, language, province)
+        VALUE
+        (#{userId}, #{openId}, #{nickName}, #{avatarUrl}, #{city}, #{country}, #{gender}, #{language}, #{province})
+    </insert>
+</mapper>
