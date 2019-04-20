@@ -122,5 +122,19 @@ Page({
         url: '../person/person?active=' + event.detail,
       })
     }
-  }
+  },
+  openAlert: function () {
+    wx.showModal({
+      content: '弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内',
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        }
+      }
+    });
+  },
+  formSubmit(e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+  },
 })

@@ -72,9 +72,9 @@ App({
             }
           })
         } else {
-          wx.reLaunch({
-            url: '/pages/translation/index',
-          })
+          // wx.reLaunch({
+          //   url: '/pages/translation/index',
+          // })
         }
       }
     })

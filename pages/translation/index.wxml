@@ -1,5 +1,5 @@
 <!-- 输出框 -->
-<view>
+<!-- <view>
   <van-row>
     <van-col span="5" offset="0">
       <view class="section">
@@ -17,18 +17,51 @@
       </view>
     </van-col>
     <van-col span="19">
-      <van-field input-align="center" value="{{ value }}" placeholder="查单词或翻译句子" border="{{ false }}" clearable use-button-slot="true" adjust-position="true" icon="question-o" bind:click-icon="onClickIcon">
-      </van-field>
-      <van-popup show="{{ show.middle }}" custom-class="center" overlay="false" transition="none" bind:close="onClickIcon">
-        内容
-      </van-popup>
+
+      <view>
+        <van-field input-align="center" value="{{word}}" placeholder="查单词或翻译句子" border="true" use-icon-slot="true" icon="question-o" adjust-position="true" bind:click-icon="onClickIcon">
+        </van-field>
+      </view>
+      <view>
+        <van-popup show="{{ show.middle }}" custom-class="center" overlay="false" transition="none" bind:close="onClickIcon">
+          内容
+        </van-popup>
+      </view>
     </van-col>
   </van-row>
-</view>
+</view> -->
 <!-- 翻译按钮 -->
-<view class="{{isIphoneX?'isIPX':'row'}}">
+<!-- <view class="{{isIphoneX?'isIPX':'row'}}">
   <van-button type="info" size='large' round custom-class="demo-margin-bottom">翻译</van-button>
-</view>
+</view> -->
+
+<form bindsubmit='formSubmit'>
+  <view class="flex  p-xs margin-bottom-sm mb-sm">
+    <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+      <view class="flex-sub radius">
+        <view class="flex">
+          <view class="flex-sub  padding-sm  radius">{{multiArray[0][multiIndex[0]]}}</view>
+          <view class="flex-sub  padding-sm  radius">
+            <image class='translation' src='../../package/icons/translation2.png' mode='aspectFit' />
+          </view>
+          <view class="flex-sub padding-sm  radius">{{multiArray[1][multiIndex[1]]}}</view>
+        </view>
+      </view>
+    </picker>
+    <!-- 输入框和翻译按钮 -->
+    <view class="flex-treble bg-gray padding-sub margin-xs radius cu-form-group">
+      <!-- <van-field input-align="center" value="{{word}}" placeholder="查单词或翻译句子" border="true" use-icon-slot="true" icon="question-o" adjust-position="true" bind:click-icon="onClickIcon">
+    </van-field> -->
+      <input value='{{word}}' name='word' type='text' placeholder='查单词或翻译句子' placeholder-class='text-center' adjust-position='true' type='text' confirm-type='search' class='weui-input' />
+      <button class="cu-btn icon" bindtap="openAlert">
+        <text class="icon-question"></text>
+      </button>
+    </view>
+  </view>
+  <view class="padding {{isIphoneX?'isIPX':'row'}}">
+    <button class="cu-btn block bg-blue margin-tb-sm lg" form-type='submit'>翻译</button>
+  </view>
+</form>
 <!-- tabbar标签栏 -->
 <view>
   <van-tabbar active="{{ active }}" safe-area-inset-bottom="true" bind:change="onChange">
