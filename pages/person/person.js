@@ -38,21 +38,6 @@ Page({
           })
         }
       }
-      // success: function(res) {
-      //   if (res.authSetting['scope.userInfo']) {
-      //     wx.getUserInfo({
-      //       success: function(res) {
-      //         //从数据库获取用户信息
-      //         that.queryUsreInfo();
-      //         //用户已经授权过
-      //         wx.switchTab({
-      //           url: '../translation/index'
-      //         })
-      //       }
-      //     });
-      //   }
-      // }
-
     })
 
   },
@@ -126,24 +111,46 @@ Page({
   },
   bindGetUserInfo(e) {
     var that = this
-    console.log('flag：' + app.globalData.flag)
-    console.log('person：' + app.globalData.openid)
+    console.log(app.globalData.flag)
     if (e.detail.userInfo != null) {
-      console.log(' ' + app.globalData.openid)
       that.setData({
         nickName: e.detail.userInfo.nickName,
         avatarUrl: e.detail.userInfo.avatarUrl,
       })
-      wx.redirectTo({
-        url: '../person/person?active=' + 2,
-      })
+
+    }
+    if (app.globalData.flag != true) {
       wx.getUserInfo({
         success(res) {
           console.log('encryptedData：' + res.encryptedData)
+          wx.request({
+            url: app.globalData.urlPath + '/WxUser/addwxuser',
+            data: {
+              openId: app.globalData.openid,
+              nickName: res.userInfo.nickName,
+              avatarUrl: res.userInfo.avatarUrl,
+              city: res.userInfo.city,
+              country: res.userInfo.country,
+              gender: res.userInfo.gender,
+              language: res.userInfo.language,
+              province: res.userInfo.province
+            },
+            method: 'POST',
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function(res) {
+              console.log(res.data)
+              wx.redirectTo({
+                url: '../person/person?active=' + 2,
+              })
+            }
+          })
         }
       })
     }
     
+
   },
   queryWxUserInfo: function() {
     console.log(app.globalData.openid)
@@ -156,9 +163,9 @@ Page({
         'content-type': 'application/json'
       },
       success: function(res) {
+        console.log(res.data)
         app.globalData.flag = res.data.success
       }
     })
-
   },
 })
