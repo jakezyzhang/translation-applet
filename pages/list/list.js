@@ -5,14 +5,15 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     active: 0,
     nickName: '微信授权登录',
-    avatarUrl: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg',
+    avatarUrl: '../../package/head.png',
     openid: undefined
   },
   onLoad: function(options) {
-    this.setData({
+    var that = this;
+    that.setData({
       active: options.active
     })
-    var that = this;
+    
     // 查看是否授权
     // wx.getSetting({
     //   success: function (res) {
@@ -141,6 +142,7 @@ Page({
       success: function(res) {
         app.globalData.userInfo = res.data;
       }
+      
     });
   },
 

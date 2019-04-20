@@ -119,7 +119,7 @@ Page({
     }
     if (event.detail == 2) {
       wx.redirectTo({
-        url: '../list/list?active=' + event.detail,
+        url: '../person/person?active=' + event.detail,
       })
     }
   }

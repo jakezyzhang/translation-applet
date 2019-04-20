@@ -1,36 +1,60 @@
 // pages/person/person.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    active: 0,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    nickName: undefined
+    active: 0,
+    nickName: '微信授权登录',
+    avatarUrl: '../../package/icons/head.png',
+    flag: undefined
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options.active)
-    this.setData({
+    var that = this;
+    that.setData({
       active: options.active
     })
-    // 查看是否授权
+    that.queryWxUserInfo();
     wx.getSetting({
       success(res) {
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
             success(res) {
-              console.log(res.userInfo)
+              console.log(res.encryptedData)
+              // that.queryWxUserInfo();
+              that.setData({
+                nickName: res.userInfo.nickName,
+                avatarUrl: res.userInfo.avatarUrl
+              })
             }
           })
         }
       }
+      // success: function(res) {
+      //   if (res.authSetting['scope.userInfo']) {
+      //     wx.getUserInfo({
+      //       success: function(res) {
+      //         //从数据库获取用户信息
+      //         that.queryUsreInfo();
+      //         //用户已经授权过
+      //         wx.switchTab({
+      //           url: '../translation/index'
+      //         })
+      //       }
+      //     });
+      //   }
+      // }
+
     })
+
   },
 
   /**
@@ -96,14 +120,45 @@ Page({
     }
     if (event.detail == 2) {
       wx.redirectTo({
-        url: '../list/list?active=' + event.detail,
+        url: '../person/person?active=' + event.detail,
       })
     }
   },
   bindGetUserInfo(e) {
-    console.log(e.detail.userInfo)
-    this.setData({
-      nickName: e.detail.userInfo.nickName
+    var that = this
+    console.log('flag：' + app.globalData.flag)
+    console.log('person：' + app.globalData.openid)
+    if (e.detail.userInfo != null) {
+      console.log(' ' + app.globalData.openid)
+      that.setData({
+        nickName: e.detail.userInfo.nickName,
+        avatarUrl: e.detail.userInfo.avatarUrl,
+      })
+      wx.redirectTo({
+        url: '../person/person?active=' + 2,
+      })
+      wx.getUserInfo({
+        success(res) {
+          console.log('encryptedData：' + res.encryptedData)
+        }
+      })
+    }
+    
+  },
+  queryWxUserInfo: function() {
+    console.log(app.globalData.openid)
+    wx.request({
+      url: app.globalData.urlPath + '/WxUser/userbyopenid',
+      data: {
+        openId: app.globalData.openid
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function(res) {
+        app.globalData.flag = res.data.success
+      }
     })
-  }
+
+  },
 })

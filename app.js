@@ -2,11 +2,14 @@ App({
   globalData: {
     isIphoneX: false,
     userInfo: null,
-    urlPath: "https://myserver.com",
+    urlPath: "http://localhost:8082/translation",
     about: '此项目长期维护，如果有需要的可以在github自行下载，感觉还不错可以给作者star',
     openid: undefined,
     appid: 'wx11b17040118611a9',
-    secret: '26a9537756d7f125244e021b312afb19'
+    secret: '26a9537756d7f125244e021b312afb19',
+    unionid: undefined,
+    session_key: undefined,
+    flag: undefined
   },
   onShow: function() {
     let that = this;
@@ -33,7 +36,6 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
           var code = res.code;
-          console.log(code);
           wx.request({
             url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + that.globalData.appid + '&secret=' + that.globalData.secret + '&js_code=' + code + '&grant_type=authorization_code',
             data: {},
@@ -42,8 +44,9 @@ App({
               'content-type': 'application/json' // 默认值
             },
             success: function(res) {
-              that.globalData.openid = res.data.openid
-              // console.log('that.globalData.openid为' + that.globalData.openid + 'openid为' + res.data.openid);
+              that.globalData.openid = res.data.openid;
+              that.globalData.session_key = res.data.session_key;
+              console.log(that.globalData.openid);
             }
           });
         }
@@ -57,12 +60,14 @@ App({
           wx.getUserInfo({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-              console.log(res.userInfo);
+              that.globalData.userInfo = res.userInfo
+              console.log(res.encryptedData)
+              // console.log(res.userInfo);
+              // console.log(that.globalData.unionid);
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
+              if (that.userInfoReadyCallback) {
+                that.userInfoReadyCallback(res)
               }
             }
           })
