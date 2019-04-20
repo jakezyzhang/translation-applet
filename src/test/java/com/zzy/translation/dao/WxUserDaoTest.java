@@ -1,6 +1,7 @@
 package com.zzy.translation.dao;
 
 import com.zzy.translation.entity.WxUser;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,22 @@ public class WxUserDaoTest {
 
         int effectedNum = wxUserDao.insertWxUser(wxUser);
         assertEquals(1, effectedNum);
+    }
+    @Test
+    public void queryWxUser() {
+        String openId = "ousP54gfHHkcQPjxtoR-B_cze3T4";
+        WxUser wxUser = wxUserDao.queryWxUserByOpenId(openId);
+        System.out.println(wxUser.getUserId().length());
+        assertEquals(13, wxUser.getUserId().length());
+    }
+
+    @Test
+    @Ignore
+    public void queryWxUserByOpenId1() {
+    }
+
+    @Test
+    @Ignore
+    public void insertWxUser1() {
     }
 }

@@ -3,6 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zzy.translation.dao.WxUserDao">
+    <select id="queryWxUserByOpenId" resultType="com.zzy.translation.entity.WxUser">
+        SELECT user_id, open_id, nick_name,
+              avatar_url, city, country,
+              gender, language, province
+        FROM tb_wxuser
+        WHERE open_id = #{openId}
+    </select>
     <insert id="insertWxUser" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.zzy.translation.entity.WxUser">
         INSERT INTO
         tb_wxuser(user_id, open_id,

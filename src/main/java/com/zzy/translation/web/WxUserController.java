@@ -17,7 +17,13 @@ public class WxUserController {
 
     @Autowired
     private WxUserService wxUserService;
-
+    @RequestMapping(value = "/userbyopenid", method = RequestMethod.GET)
+    private Map<String, Object> queryWxUserByOpenId(String openId){
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        boolean flag = wxUserService.queryWxUserByOpenId(openId);
+        modelMap.put("success", flag);
+        return modelMap;
+    }
     @RequestMapping(value = "/addwxuser", method = RequestMethod.POST)
     private Map<String, Object> addWxUser(@RequestBody WxUser wxUser){
         Map<String, Object> modelMap = new HashMap<String, Object>();

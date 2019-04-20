@@ -12,6 +12,25 @@ public class WxUserServiceImpl implements WxUserService {
     @Autowired
     private WxUserDao wxUserDao;
 
+    @Override
+    public boolean queryWxUserByOpenId(String openId) {
+        if (openId != null && !"".equals(openId)){
+            try {
+                int effectedNum = wxUserDao.queryWxUserByOpenId(openId).getUserId().length();
+                if (effectedNum > 0){
+                    return true;
+                }else {
+                    throw new RuntimeException("获取用户信息失败!");
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("获取用户信息失败!" + e.getMessage());
+            }
+        }else {
+            throw new RuntimeException("openId不能为空!");
+        }
+
+    }
+
     @Transactional
     @Override
     public boolean addWxUser(WxUser wxUser) {
