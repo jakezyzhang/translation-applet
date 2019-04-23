@@ -14,7 +14,8 @@ Page({
     active: 0,
     show: {
       middle: false
-    }
+    },
+    transResult: ''
   },
 
   /**
@@ -101,7 +102,8 @@ Page({
     }
     data.multiIndex[e.detail.column] = e.detail.value
     data.multiArray[1] = ['中', '英', '法', '日', '韩']
-    console.log(data.multiIndex)
+    console.log('第一列:' + data.multiIndex[0] + '第二列:' + data.multiIndex[1])
+    console.log(data)
     this.setData(data)
   },
   onChange(event) {
@@ -123,11 +125,11 @@ Page({
       })
     }
   },
-  openAlert: function () {
+  openAlert: function() {
     wx.showModal({
       content: '弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内',
       showCancel: false,
-      success: function (res) {
+      success: function(res) {
         if (res.confirm) {
           console.log('用户点击确定')
         }
@@ -135,6 +137,25 @@ Page({
     });
   },
   formSubmit(e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    var that = this
+    console.log('form发生了submit事件，携带数据为：', e.detail.value.word + data.multiIndex[0])
+    wx.request({
+      url: app.globalData.urlPath + '/Word/translation',
+      data: {
+        query: e.detail.value.word,
+        from: data.multiIndex[0],
+        to: data.multiIndex[1]
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function(res) {
+        console.log(res.data)
+        that.setData({
+          transResult: res.data
+        })
+      }
+    })
   },
 })

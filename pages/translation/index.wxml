@@ -62,6 +62,10 @@
     <button class="cu-btn block bg-blue margin-tb-sm lg" form-type='submit'>翻译</button>
   </view>
 </form>
+
+<view>
+<text>{{transResult}}</text>
+</view>
 <!-- tabbar标签栏 -->
 <view>
   <van-tabbar active="{{ active }}" safe-area-inset-bottom="true" bind:change="onChange">
