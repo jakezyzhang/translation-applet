@@ -62,10 +62,38 @@
     <button class="cu-btn block bg-blue margin-tb-sm lg" form-type='submit'>翻译</button>
   </view>
 </form>
+<!-- 翻译结果框 -->
+<view wx:for="{{list}}" wx:key="">
+  <view class="cu-chat">
+  <view class="cu-item self">
+      <view class="main">
+        <view class="content bg-green shadow">
+          <text>{{item.src}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class="main">
+        <view class="content shadow">
+          <text>{{item.dst}}</text>
+        </view>
+      </view>
+      <view class="date "> 13:23</view>
+    </view>
+    
+  </view>
 
-<view>
-<text>{{transResult}}</text>
 </view>
+<!-- <view class="cu-chat" style='display:{{isHide}}'>
+  <view class="cu-item">
+    <view class="main">
+      <view class="content shadow">
+        <text>{{transResult}}</text>
+      </view>
+    </view>
+    <view class="date "> 13:23</view>
+  </view>
+</view> -->
 <!-- tabbar标签栏 -->
 <view>
   <van-tabbar active="{{ active }}" safe-area-inset-bottom="true" bind:change="onChange">

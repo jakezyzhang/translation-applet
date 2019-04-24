@@ -7,15 +7,20 @@ Page({
    */
   data: {
     multiArray: [
-      ['中', '英', '法', '日', '韩'],
+      ['中', '英', '法', '日', '韩', 'AI'],
       ['中', '英', '法', '日', '韩']
     ],
-    multiIndex: [0, 0, 0],
+    multiIndex: [0, 0],
     active: 0,
     show: {
       middle: false
     },
-    transResult: ''
+    transResult: '',
+    isHide: 'none',
+    chatView: '',
+    list: [],
+
+
   },
 
   /**
@@ -138,24 +143,52 @@ Page({
   },
   formSubmit(e) {
     var that = this
-    console.log('form发生了submit事件，携带数据为：', e.detail.value.word + data.multiIndex[0])
+    var kword = that.trim(e.detail.value.word)
+    console.log('form发生了submit事件，携带数据为：', e.detail.value.word + that.data.multiIndex[0])
+    if (kword == '') {
+      console.log("run here")
+      return;
+    }
     wx.request({
       url: app.globalData.urlPath + '/Word/translation',
       data: {
-        query: e.detail.value.word,
-        from: data.multiIndex[0],
-        to: data.multiIndex[1]
+        query: kword,
+        from: that.data.multiIndex[0],
+        to: that.data.multiIndex[1]
       },
       method: 'GET',
       header: {
         'content-type': 'application/json'
       },
       success: function(res) {
-        console.log(res.data)
+        that.data.list.push(res.data)
+        //         chatView = "<view class=\"cu - chat\">\
+        //           < view class=\"cu-item\" >\
+        //             <view class=\"main\">\
+        //               <view class=\"content shadow\">\
+        //                 <text>{{ transResult }}</text>\
+        //               </view>\
+        //             </view>\
+        //             <view class=\"date \"> 13:23</view>\
+        //   </view >\
+        // </view >"
+
         that.setData({
-          transResult: res.data
+          // transResult: res.data,
+          list:that.data.list
+
         })
+          
+        // that.data.list.push(res.data)
+        // if (res.data == '') {
+        //   that.setData({
+        //     chatView: ""
+        //   })
+        // }
       }
     })
   },
+  trim: function(str) {
+    return str.replace(/(^\s*)|(\s*$)/g, "");
+  }
 })
