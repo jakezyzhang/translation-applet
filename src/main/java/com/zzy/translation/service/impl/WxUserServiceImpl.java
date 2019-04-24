@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Service
 public class WxUserServiceImpl implements WxUserService {
     @Autowired
@@ -46,6 +49,7 @@ public class WxUserServiceImpl implements WxUserService {
             } catch (Exception e) {
                 throw new RuntimeException("插入微信用户信息失败：" + e.getMessage());
             }
+
         }else {
             throw new RuntimeException("openid不能为空");
         }

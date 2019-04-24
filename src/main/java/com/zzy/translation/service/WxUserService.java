@@ -2,6 +2,9 @@ package com.zzy.translation.service;
 
 import com.zzy.translation.entity.WxUser;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 public interface WxUserService {
     /**
      * 根据openid查询用户

@@ -5,6 +5,8 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONString;
 
+import javax.servlet.http.HttpSession;
+
 public class Json2String {
     private JSONObject jsonObject;
     private String str;
@@ -14,7 +16,7 @@ public class Json2String {
         this.str = str;
     }
 
-    public static String jsonString2String(String str){
+    public static JSONObject jsonString2String(HttpSession session, String str){
         if (str == null){
             return null;
         }
@@ -25,10 +27,13 @@ public class Json2String {
         String transResult = jsonObject.getString("trans_result");
         JSONArray jsonArray = JSONArray.fromObject(transResult);
         JSONObject jsonObject1 = JSONObject.fromObject(jsonArray.getString(0));
-        String dst = jsonObject1.getString("dst");
-        return dst;
+
+        return jsonObject1;
     }
 
+    public static String jsonString2Src(String str){
+        return null;
+    }
     public static JSONObject string2Json(String str){
 
         return null;

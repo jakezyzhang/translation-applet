@@ -1,13 +1,20 @@
 package com.zzy.translation.web;
 
+import com.zzy.translation.entity.WxInfo;
 import com.zzy.translation.entity.WxUser;
 import com.zzy.translation.service.WxUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +31,7 @@ public class WxUserController {
         modelMap.put("success", flag);
         return modelMap;
     }
+
     @RequestMapping(value = "/addwxuser", method = RequestMethod.POST)
     private Map<String, Object> addWxUser(@RequestBody WxUser wxUser){
         Map<String, Object> modelMap = new HashMap<String, Object>();
@@ -31,4 +39,7 @@ public class WxUserController {
         modelMap.put("success", flag);
         return modelMap;
     }
+
+
+
 }

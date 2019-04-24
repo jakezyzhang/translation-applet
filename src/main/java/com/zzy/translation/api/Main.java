@@ -12,6 +12,6 @@ public class Main {
 
 
         System.out.println(HttpGet.get(query, from, to));
-        System.out.println(Json2String.jsonString2String(HttpGet.get(query, from, to)));
+//        System.out.println(Json2String.jsonString2String(HttpGet.get(query, from, to)));
     }
 }
