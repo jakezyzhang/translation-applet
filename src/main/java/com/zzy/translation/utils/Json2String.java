@@ -16,7 +16,7 @@ public class Json2String {
         this.str = str;
     }
 
-    public static JSONObject jsonString2String(HttpSession session, String str){
+    public static JSONObject jsonString2String(String str){
         if (str == null){
             return null;
         }
@@ -27,16 +27,12 @@ public class Json2String {
         String transResult = jsonObject.getString("trans_result");
         JSONArray jsonArray = JSONArray.fromObject(transResult);
         JSONObject jsonObject1 = JSONObject.fromObject(jsonArray.getString(0));
-
         return jsonObject1;
     }
 
     public static String jsonString2Src(String str){
         return null;
     }
-    public static JSONObject string2Json(String str){
-
-        return null;
-    }
+    public static JSONObject string2Json(String str){ return null; }
 
 }
