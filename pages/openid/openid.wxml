@@ -1,0 +1,5 @@
+<!--pages/openid/openid.wxml-->
+<text>pages/openid/openid.wxml</text>
+<form bindsubmit='formSubmit'>
+<button form-type='submit' class="cu-btn block bg-blue margin-tb-sm lg">OpenId</button>
+</form>

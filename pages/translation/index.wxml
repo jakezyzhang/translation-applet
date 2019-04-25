@@ -36,7 +36,7 @@
 </view> -->
 
 <form bindsubmit='formSubmit'>
-  <view class="flex  p-xs margin-bottom-sm mb-sm">
+  <view class="flex p-xs margin-bottom-sm mb-sm">
     <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
       <view class="flex-sub radius">
         <view class="flex">
@@ -52,38 +52,39 @@
     <view class="flex-treble bg-gray padding-sub margin-xs radius cu-form-group">
       <!-- <van-field input-align="center" value="{{word}}" placeholder="查单词或翻译句子" border="true" use-icon-slot="true" icon="question-o" adjust-position="true" bind:click-icon="onClickIcon">
     </van-field> -->
-      <input value='{{word}}' name='word' type='text' placeholder='查单词或翻译句子' placeholder-class='text-center' adjust-position='true' type='text' confirm-type='search' class='weui-input' />
+      <input value='{{word}}' name='word' id='word' type='text' placeholder='查单词或翻译句子' placeholder-class='text-center' adjust-position='true' type='text' confirm-type='search' class='weui-input ' />
       <button class="cu-btn icon" bindtap="openAlert">
         <text class="icon-question"></text>
       </button>
     </view>
   </view>
-  <view class="padding {{isIphoneX?'isIPX':'row'}}">
-    <button class="cu-btn block bg-blue margin-tb-sm lg" form-type='submit'>翻译</button>
+
+  <!-- 翻译结果框 -->
+  <scroll-view scroll-y="true" style='height: {{scrollHeight + "px"}}'>
+    <view wx:for="{{list}}" wx:key="" class='cu-item'>
+      <view class="cu-chat">
+        <view class="cu-item self">
+          <view class="main">
+            <view class="content bg-green shadow">
+              <text>{{item.src}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="cu-item">
+          <view class="main">
+            <view class="content shadow">
+              <text>{{item.dst}}</text>
+            </view>
+          </view>
+          <view class="date "> 13:23</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="padding {{isIphoneX?'isIPX':'row'}} ">
+    <button class="cu-btn block bg-blue margin-tb-sm lg " id='transBtn'form-type='submit'>翻译</button>
   </view>
 </form>
-<!-- 翻译结果框 -->
-<view wx:for="{{list}}" wx:key="">
-  <view class="cu-chat">
-  <view class="cu-item self">
-      <view class="main">
-        <view class="content bg-green shadow">
-          <text>{{item.src}}</text>
-        </view>
-      </view>
-    </view>
-    <view class="cu-item">
-      <view class="main">
-        <view class="content shadow">
-          <text>{{item.dst}}</text>
-        </view>
-      </view>
-      <view class="date "> 13:23</view>
-    </view>
-    
-  </view>
-
-</view>
 <!-- <view class="cu-chat" style='display:{{isHide}}'>
   <view class="cu-item">
     <view class="main">
@@ -95,6 +96,12 @@
   </view>
 </view> -->
 <!-- tabbar标签栏 -->
+<!--  -->
+
+
+
+
+<!--  -->
 <view>
   <van-tabbar active="{{ active }}" safe-area-inset-bottom="true" bind:change="onChange">
     <van-tabbar-item>

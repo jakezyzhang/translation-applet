@@ -1,12 +1,12 @@
 {
   "pages": [
+    "pages/openid/openid",
     "pages/translation/index",
     "pages/article/article",
     "pages/news/news",
     "pages/question/question",
     "pages/person/person",
     "pages/list/list"
-    
   ],
   "usingComponents": {
     "van-button": "../../dist/button/index",

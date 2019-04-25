@@ -1,7 +1,5 @@
 const app = getApp()
-
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -19,8 +17,7 @@ Page({
     isHide: 'none',
     chatView: '',
     list: [],
-
-
+    scrollHeight: 0,
   },
 
   /**
@@ -33,8 +30,8 @@ Page({
       isIphoneX: isIphoneX,
       active: options.active
     })
-
-
+    this.computeScrollViewHeight()
+  
   },
 
   /**
@@ -144,6 +141,7 @@ Page({
   formSubmit(e) {
     var that = this
     var kword = that.trim(e.detail.value.word)
+    console.log(kword)
     console.log('form发生了submit事件，携带数据为：', e.detail.value.word + that.data.multiIndex[0])
     if (kword == '') {
       console.log("run here")
@@ -161,34 +159,32 @@ Page({
         'content-type': 'application/json'
       },
       success: function(res) {
+        console.log(res.data)
         that.data.list.push(res.data)
-        //         chatView = "<view class=\"cu - chat\">\
-        //           < view class=\"cu-item\" >\
-        //             <view class=\"main\">\
-        //               <view class=\"content shadow\">\
-        //                 <text>{{ transResult }}</text>\
-        //               </view>\
-        //             </view>\
-        //             <view class=\"date \"> 13:23</view>\
-        //   </view >\
-        // </view >"
-
+        console.log(that.data.list)
         that.setData({
-          // transResult: res.data,
-          list:that.data.list
-
+          list: that.data.list
         })
-          
-        // that.data.list.push(res.data)
-        // if (res.data == '') {
-        //   that.setData({
-        //     chatView: ""
-        //   })
-        // }
       }
     })
   },
   trim: function(str) {
     return str.replace(/(^\s*)|(\s*$)/g, "");
-  }
+  },
+  computeScrollViewHeight(){
+    var that = this
+    var query = wx.createSelectorQuery()
+    query.select('#word').boundingClientRect()
+    query.select('#transBtn').boundingClientRect()
+    query.exec(res => {
+      var searchHeight = res[0].height
+      var bottonHeight = res[1].height
+      var windowHeight = wx.getSystemInfoSync().windowHeight
+      var scrollHeight = windowHeight - searchHeight - bottonHeight - 50 - 50 - 50
+      console.log(scrollHeight)
+      that.setData({
+        scrollHeight: scrollHeight
+      })
+    })
+  },
 })
