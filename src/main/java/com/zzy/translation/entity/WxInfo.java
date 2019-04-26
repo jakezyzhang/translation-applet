@@ -4,6 +4,15 @@ public class WxInfo {
     private String appId;
     private String secret;
     private String code;
+    private String openId;
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
 
     public String getAppId() {
         return appId;
