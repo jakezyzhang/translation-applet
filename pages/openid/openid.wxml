@@ -3,3 +3,4 @@
 <form bindsubmit='formSubmit'>
 <button form-type='submit' class="cu-btn block bg-blue margin-tb-sm lg">OpenId</button>
 </form>
+<navigator ></navigator>

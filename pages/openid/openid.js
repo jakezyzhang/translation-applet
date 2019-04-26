@@ -69,7 +69,7 @@ Page({
     wx.login({
       success: function(res) {
         wx.request({
-          url: app.globalData.urlPath + '/Word/getopenid',
+          url: 'https://www.zyaiyy.cn/translation/Word/getopenid',
           data: {
             appId: 'wx11b17040118611a9',
             secret: '26a9537756d7f125244e021b312afb19',
@@ -77,7 +77,8 @@ Page({
           },
           method: 'GET',
           header: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            'Cookie':'code=' + res.code
           },
           success: function(res) {
             console.log(res.data)
