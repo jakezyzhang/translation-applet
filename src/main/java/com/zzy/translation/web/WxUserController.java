@@ -1,5 +1,6 @@
 package com.zzy.translation.web;
 
+import com.zzy.translation.config.session.MySessionContext;
 import com.zzy.translation.entity.WxInfo;
 import com.zzy.translation.entity.WxUser;
 import com.zzy.translation.service.WxUserService;
@@ -33,8 +34,12 @@ public class WxUserController {
     }
 
     @RequestMapping(value = "/addwxuser", method = RequestMethod.POST)
-    private Map<String, Object> addWxUser(@RequestBody WxUser wxUser){
+    private Map<String, Object> addWxUser(@CookieValue("JSESSIONID") String sessionId,@RequestBody WxUser wxUser){
         Map<String, Object> modelMap = new HashMap<String, Object>();
+        MySessionContext mySessionContext = MySessionContext.getInstance();
+        HttpSession session = mySessionContext.getSession(sessionId);
+        WxInfo wxInfo = (WxInfo) session.getAttribute("WxInfo");
+        wxUser.setOpenId(wxInfo.getOpenId());
         boolean flag = wxUserService.addWxUser(wxUser);
         modelMap.put("success", flag);
         return modelMap;

@@ -1,27 +1,22 @@
 package com.zzy.translation.web;
 
-import com.zzy.translation.config.session.MySessionContext;
 import com.zzy.translation.entity.Word;
-import com.zzy.translation.entity.WxInfo;
 import com.zzy.translation.service.WordService;
 import com.zzy.translation.utils.Json2String;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/Word")
+@CrossOrigin
 public class WordController {
     @Autowired
     private HttpServletRequest request;
@@ -34,32 +29,12 @@ public class WordController {
         return resultJson;
     }
 
-    @RequestMapping(value = "/getopenid", method = RequestMethod.GET)
-    private void getOpenId(WxInfo wxInfo, @CookieValue("code") String code){
-        try {
-            URL url = new URL("https://api.weixin.qq.com/sns/jscode2session?appid=" + wxInfo.getAppId() + "&secret=" + wxInfo.getSecret() + "&js_code=" + wxInfo.getCode() + "&grant_type=authorization_code");
-            InputStream is = url.openStream();
-            BufferedReader bf = new BufferedReader(new InputStreamReader(is));
-            String info = null;
-            StringBuilder sb = new StringBuilder();
-            while ((info = bf.readLine()) != null){
-                sb.append(info);
-            }
-            JSONObject jsonObject = JSONObject.fromObject(sb.toString());
-            String openId = jsonObject.getString("openid");
-//            System.out.println(openId);
-            wxInfo.setOpenId(openId);
-            HttpSession httpSession = request.getSession();
-            httpSession.setAttribute("openId", openId);
-            System.out.println(httpSession.getId());
-            MySessionContext myc = MySessionContext.getInstance();
-            myc.addSession(httpSession);
-            HttpSession session = myc.getSession(httpSession.getId());
-            System.out.println("openId==" + session.getAttribute("openId"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
+    @RequestMapping(value = "addword", method = RequestMethod.POST)
+    private Map<String, Object> addWord(Word word){
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        boolean flag = wordService.addWord(word);
+        modelMap.put("success", flag);
+        return modelMap;
     }
+
 }
