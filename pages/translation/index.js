@@ -165,8 +165,13 @@ Page({
         that.setData({
           list: that.data.list
         })
+        wx.request({
+          url: app.globalData.urlPath + 'Word/addword',
+          data:{},
+        })
       }
-    })
+    });
+    
   },
   trim: function(str) {
     return str.replace(/(^\s*)|(\s*$)/g, "");

@@ -1,12 +1,12 @@
 {
   "pages": [
-    "pages/openid/openid",
     "pages/translation/index",
     "pages/article/article",
     "pages/news/news",
     "pages/question/question",
     "pages/person/person",
-    "pages/list/list"
+    "pages/list/list",
+    "pages/openid/openid"
   ],
   "usingComponents": {
     "van-button": "../../dist/button/index",
@@ -26,5 +26,6 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

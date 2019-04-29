@@ -1,40 +1,3 @@
-<!-- 输出框 -->
-<!-- <view>
-  <van-row>
-    <van-col span="5" offset="0">
-      <view class="section">
-        <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
-          <view class="picker">
-            <van-row>
-              <van-col span="8">{{multiArray[0][multiIndex[0]]}}</van-col>
-              <van-col span="8">
-                <image class='translation' src='../../package/icons/translation2.png' mode='aspectFit' />
-              </van-col>
-              <van-col span="8">{{multiArray[1][multiIndex[1]]}}</van-col>
-            </van-row>
-          </view>
-        </picker>
-      </view>
-    </van-col>
-    <van-col span="19">
-
-      <view>
-        <van-field input-align="center" value="{{word}}" placeholder="查单词或翻译句子" border="true" use-icon-slot="true" icon="question-o" adjust-position="true" bind:click-icon="onClickIcon">
-        </van-field>
-      </view>
-      <view>
-        <van-popup show="{{ show.middle }}" custom-class="center" overlay="false" transition="none" bind:close="onClickIcon">
-          内容
-        </van-popup>
-      </view>
-    </van-col>
-  </van-row>
-</view> -->
-<!-- 翻译按钮 -->
-<!-- <view class="{{isIphoneX?'isIPX':'row'}}">
-  <van-button type="info" size='large' round custom-class="demo-margin-bottom">翻译</van-button>
-</view> -->
-
 <form bindsubmit='formSubmit'>
   <view class="flex p-xs margin-bottom-sm mb-sm">
     <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
@@ -85,23 +48,6 @@
     <button class="cu-btn block bg-blue margin-tb-sm lg " id='transBtn'form-type='submit'>翻译</button>
   </view>
 </form>
-<!-- <view class="cu-chat" style='display:{{isHide}}'>
-  <view class="cu-item">
-    <view class="main">
-      <view class="content shadow">
-        <text>{{transResult}}</text>
-      </view>
-    </view>
-    <view class="date "> 13:23</view>
-  </view>
-</view> -->
-<!-- tabbar标签栏 -->
-<!--  -->
-
-
-
-
-<!--  -->
 <view>
   <van-tabbar active="{{ active }}" safe-area-inset-bottom="true" bind:change="onChange">
     <van-tabbar-item>

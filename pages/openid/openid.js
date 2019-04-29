@@ -65,27 +65,39 @@ Page({
 
   },
   formSubmit(e) {
+    console.log(app.globalData.openid)
     var that = this
-    wx.login({
-      success: function(res) {
-        wx.request({
-          url: 'https://www.zyaiyy.cn/translation/Word/getopenid',
-          data: {
-            appId: 'wx11b17040118611a9',
-            secret: '26a9537756d7f125244e021b312afb19',
-            code: res.code
-          },
-          method: 'GET',
-          header: {
-            'content-type': 'application/json',
-            'Cookie':'code=' + res.code
-          },
-          success: function(res) {
-            console.log(res.data)
-          }
-        })
+    // wx.login({
+    //   success: function(res) {
+    //     wx.request({
+    //       url: app.globalData.urlPath + '/Word/getopenid',
+    //       data: {
+    //         appId: 'wx11b17040118611a9',
+    //         secret: '26a9537756d7f125244e021b312afb19',
+    //         code: res.code
+    //       },
+    //       method: 'GET',
+    //       header: {
+    //         'content-type': 'application/json',
+    //         'Cookie':'code=' + res.code
+    //       },
+    //       success: function(res) {
+    //         console.log(res.data)
+    //       }
+    //     })
+    //   }
+    // })
+    wx.request({
+      url: app.globalData.urlPath + '/WxInfo/getsessionid',
+      header: {
+        'content-type': 'application/json',
+        'Cookie': 'JSESSIONID=' + app.globalData.sessionid
+      },
+      data: {},
+      method: 'GET',
+      success:function(res){
+        console.log(res.data)
       }
     })
-
   },
 })

@@ -126,7 +126,6 @@ Page({
           wx.request({
             url: app.globalData.urlPath + '/WxUser/addwxuser',
             data: {
-              openId: app.globalData.openid,
               nickName: res.userInfo.nickName,
               avatarUrl: res.userInfo.avatarUrl,
               city: res.userInfo.city,
@@ -137,7 +136,8 @@ Page({
             },
             method: 'POST',
             header: {
-              'content-type': 'application/json'
+              'content-type': 'application/json',
+              'Cookie': 'JSESSIONID=' + app.globalData.sessionid
             },
             success: function(res) {
               console.log(res.data)

@@ -2,14 +2,13 @@ App({
   globalData: {
     isIphoneX: false,
     userInfo: null,
-    urlPath: "http://localhost:8082/translation",
+    urlPath: "http://192.168.1.8:8082/translation",
     about: '此项目长期维护，如果有需要的可以在github自行下载，感觉还不错可以给作者star',
     openid: undefined,
-    appid: 'wx11b17040118611a9',
-    secret: '26a9537756d7f125244e021b312afb19',
     unionid: undefined,
     session_key: undefined,
-    flag: undefined
+    flag: undefined,
+    sessionid:undefined
   },
   onShow: function() {
     let that = this;
@@ -37,18 +36,21 @@ App({
         if (res.code) {
           var code = res.code;
           wx.request({
-            url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + that.globalData.appid + '&secret=' + that.globalData.secret + '&js_code=' + code + '&grant_type=authorization_code',
-            data: {},
+            url: that.globalData.urlPath + '/WxInfo/getopenid',
+            data: {
+              code: res.code
+            },
             method: 'GET',
             header: {
-              'content-type': 'application/json' // 默认值
+              'content-type': 'application/json',
+              'Cookie': 'code=' + res.code
             },
-            success: function(res) {
-              that.globalData.openid = res.data.openid;
-              that.globalData.session_key = res.data.session_key;
-              console.log(that.globalData.openid);
+            success: function (res) {
+              console.log(res.data.WxInfo.sessionId)
+              that.globalData.openid = res.data.WxInfo.openId
+              that.globalData.sessionid = res.data.WxInfo.sessionId
             }
-          });
+          })
         }
       }
     })
@@ -62,6 +64,7 @@ App({
               // 可以将 res 发送给后台解码出 unionId
               that.globalData.userInfo = res.userInfo
               console.log(res.encryptedData)
+              // console.log(that.globalData.openid)
               // console.log(res.userInfo);
               // console.log(that.globalData.unionid);
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
