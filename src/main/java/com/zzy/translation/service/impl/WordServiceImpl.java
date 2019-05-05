@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class WordServiceImpl implements WordService {
@@ -20,23 +21,29 @@ public class WordServiceImpl implements WordService {
         String query = word.getQuery();
         String[] fromArr = {"zh", "en", "fra", "jp", "kor", "auto"};
         String[] toArr = {"zh", "en", "fra", "jp", "kor"};
-        String from = fromArr[Integer.parseInt(word.getFrom())];
-        String to = toArr[Integer.parseInt(word.getTo())];
+        String from = fromArr[Integer.parseInt(word.getFromWord())];
+        String to = toArr[Integer.parseInt(word.getToWord())];
         String result = HttpGet.get(query, from, to);
         return result;
     }
 
     @Override
+    public List<Word> queryWordByOpenId(String openId) {
+        return wordDao.queryWordByOpenId(openId);
+    }
+
+    @Override
     public boolean addWord(Word word) {
         if (word.getOpenId() != null && !"".equals(word.getOpenId())){
+            word.setWordId(String.valueOf(System.currentTimeMillis()));
             word.setCreateTime(new Date());
             word.setLastEditTime(new Date());
             String[] fromArr = {"zh", "en", "fra", "jp", "kor", "auto"};
             String[] toArr = {"zh", "en", "fra", "jp", "kor"};
-            String from = fromArr[Integer.parseInt(word.getFrom())];
-            String to = toArr[Integer.parseInt(word.getTo())];
-            word.setFrom(from);
-            word.setTo(to);
+            String from = fromArr[Integer.parseInt(word.getFromWord())];
+            String to = toArr[Integer.parseInt(word.getToWord())];
+            word.setFromWord(from);
+            word.setToWord(to);
             try {
                 int effectedNum = wordDao.insertWord(word);
                 if (effectedNum > 0){
@@ -49,6 +56,25 @@ public class WordServiceImpl implements WordService {
             }
         }else {
             throw new RuntimeException("未授权微信");
+        }
+
+    }
+
+    @Override
+    public boolean deleteWord(Word word) {
+        if(word.getWordId() != null && !"".equals(word.getWordId())){
+            try {
+                int effectedNum = wordDao.deleteWord(word);
+                if (effectedNum > 0){
+                    return true;
+                }else {
+                    throw new RuntimeException("删除单词记录失败");
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("删除单词记录失败：" + e.getMessage());
+            }
+        }else {
+            throw new RuntimeException("删除单词记录失败, wordId不能为空");
         }
 
     }

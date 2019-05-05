@@ -4,12 +4,13 @@ import java.util.Date;
 
 public class Word {
     private int id;
+    private String wordId;
     private String openId;
     private String query;
     private String transSrc;
     private String transDst;
-    private String from;
-    private String to;
+    private String fromWord;
+    private String toWord;
     private String statusCode;
     private Date createTime;
     private Date lastEditTime;
@@ -36,6 +37,14 @@ public class Word {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getWordId() {
+        return wordId;
+    }
+
+    public void setWordId(String wordId) {
+        this.wordId = wordId;
     }
 
     public String getOpenId() {
@@ -70,20 +79,20 @@ public class Word {
         this.transDst = transDst;
     }
 
-    public String getFrom() {
-        return from;
+    public String getFromWord() {
+        return fromWord;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setFromWord(String fromWord) {
+        this.fromWord = fromWord;
     }
 
-    public String getTo() {
-        return to;
+    public String getToWord() {
+        return toWord;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setToWord(String toWord) {
+        this.toWord = toWord;
     }
 
     public String getStatusCode() {

@@ -19,4 +19,11 @@ public interface WordDao {
      */
     int insertWord(Word word);
 
+    /**
+     * 删除单词记录
+     * @param word
+     * @return
+     */
+    int deleteWord(Word word);
+
 }
