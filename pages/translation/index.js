@@ -18,6 +18,9 @@ Page({
     chatView: '',
     list: [],
     scrollHeight: 0,
+    transSrc: undefined,
+    transDst: undefined,
+    kquery: undefined
   },
 
   /**
@@ -31,7 +34,7 @@ Page({
       active: options.active
     })
     this.computeScrollViewHeight()
-  
+
   },
 
   /**
@@ -141,6 +144,7 @@ Page({
   formSubmit(e) {
     var that = this
     var kword = that.trim(e.detail.value.word)
+    that.data.kquery = kword
     console.log(kword)
     console.log('form发生了submit事件，携带数据为：', e.detail.value.word + that.data.multiIndex[0])
     if (kword == '') {
@@ -151,32 +155,85 @@ Page({
       url: app.globalData.urlPath + '/Word/translation',
       data: {
         query: kword,
-        from: that.data.multiIndex[0],
-        to: that.data.multiIndex[1]
+        fromWord: that.data.multiIndex[0],
+        toWord: that.data.multiIndex[1]
       },
       method: 'GET',
       header: {
         'content-type': 'application/json'
       },
       success: function(res) {
-        console.log(res.data)
+        console.log(res.data.src)
         that.data.list.push(res.data)
-        console.log(that.data.list)
         that.setData({
-          list: that.data.list
+          list: that.data.list,
         })
         wx.request({
-          url: app.globalData.urlPath + 'Word/addword',
-          data:{},
-        })
+          url: app.globalData.urlPath + '/Word/addword',
+          data: {
+            query: that.data.kquery,
+            fromWord: that.data.multiIndex[0],
+            toWord: that.data.multiIndex[1],
+            transSrc: res.data.src,
+            transDst: res.data.dst
+          },
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'Cookie': 'JSESSIONID=' + app.globalData.sessionid
+          },
+          success: function (res) {
+            console.log(res.data)
+          }
+        });
       }
     });
-    
+    // console.log(that.data.transSrc)
+    // wx.request({
+    //   url: app.globalData.urlPath + '/Word/addword',
+    //   data: {
+    //     query: that.data.kquery,
+    //     fromWord: that.data.multiIndex[0],
+    //     toWord: that.data.multiIndex[1],
+    //     transSrc: that.data.transSrc,
+    //     transDst: that.data.transDst
+    //   },
+    //   method: 'POST',
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded',
+    //     'Cookie': 'JSESSIONID=' + app.globalData.sessionid
+    //   },
+    //   success: function (res) {
+    //     console.log(res.data)
+    //   }
+    // });
+  },
+  addWord: function(e) {
+    console.log('work here')
+    // var that = this
+    // wx.request({
+    //   url: app.globalData.urlPath + '/Word/addword',
+    //   data: {
+    //     query: that.data.kquery,
+    //     fromWord: that.data.multiIndex[0],
+    //     toWord: that.data.multiIndex[1],
+    //     transSrc: that.data.transSrc,
+    //     transDst: that.data.transDst
+    //   },
+    //   method: 'POST',
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded',
+    //     'Cookie': 'JSESSIONID=' + app.globalData.sessionid
+    //   },
+    //   success: function(res) {
+    //     console.log(res.data)
+    //   }
+    // });
   },
   trim: function(str) {
     return str.replace(/(^\s*)|(\s*$)/g, "");
   },
-  computeScrollViewHeight(){
+  computeScrollViewHeight() {
     var that = this
     var query = wx.createSelectorQuery()
     query.select('#word').boundingClientRect()

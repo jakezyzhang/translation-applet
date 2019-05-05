@@ -45,7 +45,7 @@
     </view>
   </scroll-view>
   <view class="padding {{isIphoneX?'isIPX':'row'}} ">
-    <button class="cu-btn block bg-blue margin-tb-sm lg " id='transBtn'form-type='submit'>翻译</button>
+    <button class="cu-btn block bg-blue margin-tb-sm lg " id='transBtn'form-type='submit' bindtap='addWord'>翻译</button>
   </view>
 </form>
 <view>
