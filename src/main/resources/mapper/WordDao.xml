@@ -23,7 +23,18 @@
         trans_dst, from_word, to_word, status_code, create_time,
         last_edit_time
         FROM tb_word
+        WHERE
+        open_id=#{OpenId}
         ORDER BY create_time
         DESC
+    </select>
+    <select id="queryWordByWordId" resultType="com.zzy.translation.entity.Word">
+        SELECT
+        id, word_id, open_id, query, trans_src,
+        trans_dst, from_word, to_word, status_code, create_time,
+        last_edit_time
+        FROM tb_word
+        WHERE
+        word_id=#{wordId}
     </select>
 </mapper>

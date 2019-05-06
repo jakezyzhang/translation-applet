@@ -33,9 +33,13 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
+    public Word queryWordByWordId(String wordId) {
+        return wordDao.queryWordByWordId(wordId);
+    }
+
+    @Override
     public boolean addWord(Word word) {
         if (word.getOpenId() != null && !"".equals(word.getOpenId())){
-            word.setWordId(String.valueOf(System.currentTimeMillis()));
             word.setCreateTime(new Date());
             word.setLastEditTime(new Date());
             String[] fromArr = {"zh", "en", "fra", "jp", "kor", "auto"};

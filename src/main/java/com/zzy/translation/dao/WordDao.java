@@ -13,6 +13,13 @@ public interface WordDao {
     List<Word> queryWordByOpenId(String openId);
 
     /**
+     * 根据wordId查询该用户所查询过的单词记录
+     * @param wordId
+     * @return
+     */
+    Word queryWordByWordId(String wordId);
+
+    /**
      * 将查询到的单词插入到数据库中
      * @param word
      * @return

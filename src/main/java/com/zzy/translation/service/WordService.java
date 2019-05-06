@@ -19,6 +19,13 @@ public interface WordService {
     List<Word> queryWordByOpenId(String openId);
 
     /**
+     * 根据wordId查询出单词记录
+     * @param wordId
+     * @return
+     */
+    Word queryWordByWordId(String wordId);
+
+    /**
      * 将查询出来的单词插入到数据库中
      * @param word
      * @return

@@ -1,5 +1,6 @@
 package com.zzy.translation.web;
 
+import com.zzy.translation.api.MD5;
 import com.zzy.translation.config.session.MySessionContext;
 import com.zzy.translation.entity.Word;
 import com.zzy.translation.entity.WxInfo;
@@ -31,16 +32,23 @@ public class WordController {
     @RequestMapping(value = "/addword", method = RequestMethod.POST)
     private Map<String, Object> addWord(Word word, @CookieValue("JSESSIONID") String sessionId){
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        MySessionContext mySessionContext = MySessionContext.getInstance();
-        HttpSession session = mySessionContext.getSession(sessionId);
-        WxInfo wxInfo = (WxInfo) session.getAttribute("WxInfo");
-        System.out.println("from:" + word.getFromWord());
-        System.out.println("to:" + word.getToWord());
-        System.out.println("query:" + word.getQuery());
-        word.setOpenId(wxInfo.getOpenId());
-        boolean flag = wordService.addWord(word);
-        modelMap.put("success", flag);
-        return modelMap;
+        StringBuilder sb = new StringBuilder();
+        sb.append(word.getTransDst());
+        sb.append(word.getTransSrc());
+        String wordId = MD5.stringMD5(sb.toString());
+        word.setWordId(wordId);
+        if (wordService.queryWordByWordId(wordId) != null ){
+            return null;
+        }else {
+            MySessionContext mySessionContext = MySessionContext.getInstance();
+            HttpSession session = mySessionContext.getSession(sessionId);
+            WxInfo wxInfo = (WxInfo) session.getAttribute("WxInfo");
+            word.setOpenId(wxInfo.getOpenId());
+            boolean flag = wordService.addWord(word);
+            modelMap.put("success", flag);
+            return modelMap;
+        }
+
     }
 
 }
