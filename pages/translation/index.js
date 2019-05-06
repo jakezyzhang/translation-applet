@@ -188,47 +188,6 @@ Page({
         });
       }
     });
-    // console.log(that.data.transSrc)
-    // wx.request({
-    //   url: app.globalData.urlPath + '/Word/addword',
-    //   data: {
-    //     query: that.data.kquery,
-    //     fromWord: that.data.multiIndex[0],
-    //     toWord: that.data.multiIndex[1],
-    //     transSrc: that.data.transSrc,
-    //     transDst: that.data.transDst
-    //   },
-    //   method: 'POST',
-    //   header: {
-    //     'content-type': 'application/x-www-form-urlencoded',
-    //     'Cookie': 'JSESSIONID=' + app.globalData.sessionid
-    //   },
-    //   success: function (res) {
-    //     console.log(res.data)
-    //   }
-    // });
-  },
-  addWord: function(e) {
-    console.log('work here')
-    // var that = this
-    // wx.request({
-    //   url: app.globalData.urlPath + '/Word/addword',
-    //   data: {
-    //     query: that.data.kquery,
-    //     fromWord: that.data.multiIndex[0],
-    //     toWord: that.data.multiIndex[1],
-    //     transSrc: that.data.transSrc,
-    //     transDst: that.data.transDst
-    //   },
-    //   method: 'POST',
-    //   header: {
-    //     'content-type': 'application/x-www-form-urlencoded',
-    //     'Cookie': 'JSESSIONID=' + app.globalData.sessionid
-    //   },
-    //   success: function(res) {
-    //     console.log(res.data)
-    //   }
-    // });
   },
   trim: function(str) {
     return str.replace(/(^\s*)|(\s*$)/g, "");

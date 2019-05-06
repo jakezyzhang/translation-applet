@@ -2,7 +2,7 @@ App({
   globalData: {
     isIphoneX: false,
     userInfo: null,
-    urlPath: "http://192.168.0.105:8087/translation",
+    urlPath: "http://192.168.1.6:8087/translation",
     about: '此项目长期维护，如果有需要的可以在github自行下载，感觉还不错可以给作者star',
     openid: undefined,
     unionid: undefined,
