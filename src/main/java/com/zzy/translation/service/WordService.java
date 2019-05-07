@@ -38,4 +38,18 @@ public interface WordService {
      * @return
      */
     boolean deleteWord(Word word);
+
+    /**
+     * 通过改变is_collection字段起到收藏的功能
+     * @param word
+     * @return
+     */
+    boolean modifyWithColletion(Word word);
+
+    /**
+     * 通过改变is_delete字段起到删除的功能
+     * @param word
+     * @return
+     */
+    boolean modifyWithDelete(Word word);
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class WordServiceImpl implements WordService {
     @Override
     public String translationWord(Word word) {
         String query = word.getQuery();
-        String[] fromArr = {"zh", "en", "fra", "jp", "kor", "auto"};
+        String[] fromArr = {"auto", "zh", "en", "fra", "jp", "kor"};
         String[] toArr = {"zh", "en", "fra", "jp", "kor"};
         String from = fromArr[Integer.parseInt(word.getFromWord())];
         String to = toArr[Integer.parseInt(word.getToWord())];
@@ -40,9 +41,12 @@ public class WordServiceImpl implements WordService {
     @Override
     public boolean addWord(Word word) {
         if (word.getOpenId() != null && !"".equals(word.getOpenId())){
+//            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+            word.setIsColletion(0);
+            word.setIsDelete(0);
             word.setCreateTime(new Date());
             word.setLastEditTime(new Date());
-            String[] fromArr = {"zh", "en", "fra", "jp", "kor", "auto"};
+            String[] fromArr = {"auto", "zh", "en", "fra", "jp", "kor"};
             String[] toArr = {"zh", "en", "fra", "jp", "kor"};
             String from = fromArr[Integer.parseInt(word.getFromWord())];
             String to = toArr[Integer.parseInt(word.getToWord())];
@@ -81,5 +85,43 @@ public class WordServiceImpl implements WordService {
             throw new RuntimeException("删除单词记录失败, wordId不能为空");
         }
 
+    }
+
+    @Override
+    public boolean modifyWithColletion(Word word) {
+        if (word.getWordId() != null && !"".equals(word.getWordId())){
+            word.setLastEditTime(new Date());
+            try {
+                int effectedNum = wordDao.updateWithColletion(word);
+                if (effectedNum > 0){
+                    return true;
+                }else {
+                    throw new RuntimeException("单词收藏失败！");
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("单词收藏失败！" + e.getMessage());
+            }
+        }else {
+            throw new RuntimeException("单词id为空！");
+        }
+    }
+
+    @Override
+    public boolean modifyWithDelete(Word word) {
+        if (word.getWordId() != null && !"".equals(word.getWordId())){
+//            word.setLastEditTime(new Date());
+            try {
+                int effectedNum = wordDao.updateWithDelete(word);
+                if (effectedNum > 0){
+                    return true;
+                }else {
+                    throw new RuntimeException("单词删除失败！");
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("单词删除失败！" + e.getMessage());
+            }
+        }else {
+            throw new RuntimeException("单词id为空！");
+        }
     }
 }

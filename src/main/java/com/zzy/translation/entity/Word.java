@@ -14,6 +14,8 @@ public class Word {
     private String statusCode;
     private Date createTime;
     private Date lastEditTime;
+    private int isColletion;
+    private int isDelete;
 
     public Date getCreateTime() {
         return createTime;
@@ -101,5 +103,21 @@ public class Word {
 
     public void setStatusCode(String statusCode) {
         this.statusCode = statusCode;
+    }
+
+    public int getIsColletion() {
+        return isColletion;
+    }
+
+    public void setIsColletion(int isColletion) {
+        this.isColletion = isColletion;
+    }
+
+    public int getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
     }
 }

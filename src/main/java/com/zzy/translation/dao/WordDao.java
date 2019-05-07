@@ -33,4 +33,17 @@ public interface WordDao {
      */
     int deleteWord(Word word);
 
+    /**
+     * 通过改变is_collection字段起到收藏的功能
+     * @param word
+     * @return
+     */
+    int updateWithColletion(Word word);
+
+    /**
+     * 通过改变is_delete字段起到删除的功能
+     * @param word
+     * @return
+     */
+    int updateWithDelete(Word word);
 }

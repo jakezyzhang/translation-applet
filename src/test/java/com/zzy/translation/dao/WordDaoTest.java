@@ -37,4 +37,14 @@ public class WordDaoTest {
         boolean flag = wordService.deleteWord(word);
         assertEquals(true, flag);
     }
+
+    @Test
+    public void updateWithDelete(){
+        Word word = new Word();
+        word.setWordId("bae3c3114cd9efe5b");
+        word.setIsDelete(1);
+        System.out.println(word.getWordId());
+        boolean flag = wordService.modifyWithDelete(word);
+        assertEquals(true, flag);
+    }
 }
