@@ -5,7 +5,7 @@ Page({
    */
   data: {
     multiArray: [
-      ['中', '英', '法', '日', '韩', 'AI'],
+      ['AI', '中', '英', '法', '日', '韩'],
       ['中', '英', '法', '日', '韩']
     ],
     multiIndex: [0, 0],
@@ -182,7 +182,7 @@ Page({
             'content-type': 'application/x-www-form-urlencoded',
             'Cookie': 'JSESSIONID=' + app.globalData.sessionid
           },
-          success: function (res) {
+          success: function(res) {
             console.log(res.data)
           }
         });

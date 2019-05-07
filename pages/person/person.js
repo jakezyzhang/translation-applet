@@ -149,8 +149,6 @@ Page({
         }
       })
     }
-    
-
   },
   queryWxUserInfo: function() {
     console.log(app.globalData.openid)

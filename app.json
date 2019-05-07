@@ -6,7 +6,8 @@
     "pages/question/question",
     "pages/person/person",
     "pages/list/list",
-    "pages/openid/openid"
+    "pages/openid/openid",
+    "pages/record/record"
   ],
   "usingComponents": {
     "van-button": "../../dist/button/index",
@@ -19,7 +20,8 @@
     "van-dialog": "../../dist/dialog/index",
     "van-tabbar": "../../dist/tabbar/index",
     "van-tabbar-item": "../../dist/tabbar-item/index",
-    "van-transition": "../../dist/transition/index"
+    "van-transition": "../../dist/transition/index",
+    "cu-custom": "/colorui/components/cu-custom"
   },
   "window": {
     "backgroundTextStyle": "light",

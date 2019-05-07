@@ -1,0 +1,19 @@
+<scroll-view>
+  <view class="cu-list menu">
+    <!-- menu-avatar -->
+    <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{list}}" wx:key='' bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}">
+      <view class=" content">
+        <view class="text-black">{{item.transSrc}}</view>
+        <view class="text-grey">译：{{item.transDst}}</view>
+      </view>
+      <view class="move">
+        <view class="bg-grey">
+          <button class="cu-btn bg-grey">收藏</button>
+        </view>
+        <view class="bg-red">
+          <navigator class="cu-btn bg-red" url='../record/record'  open-type='redirect' bindtap='onDelete' data-wordid='{{item.wordId}}'>删除</navigator>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
