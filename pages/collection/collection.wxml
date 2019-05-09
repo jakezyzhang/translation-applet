@@ -7,11 +7,8 @@
         <view class="text-grey">译：{{item.transDst}}</view>
       </view>
       <view class="move">
-        <view class="bg-grey">
-          <button class="cu-btn bg-grey" bindtap='onColletion' data-wordid='{{item.wordId}}'>收藏</button>
-        </view>
         <view class="bg-red">
-          <navigator class="cu-btn bg-red" url='../record/record'  open-type='redirect' bindtap='onDelete' data-wordid='{{item.wordId}}'>删除</navigator>
+          <navigator class="cu-btn bg-red" url='../collection/collection'  open-type='redirect' bindtap='onDeleteCollection' data-wordid='{{item.wordId}}'>删除</navigator>
         </view>
       </view>
     </view>

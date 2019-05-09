@@ -16,16 +16,18 @@
   <view class="cu-list menu {{menuBorder?'sm-border':''}} {{menuCard?'card-menu margin-top':''}}">
     <view class="cu-item {{menuCard?'arrow':''}}">
       <view class="content">
-        <image src="/package/icons/collection.png" class="png" mode="aspectFit"></image>
-        <text class="text-grey">收藏单词</text>
+        <navigator class='content' hover-class='none' url='../collection/collection' open-type='navigate'>
+          <image src="/package/icons/collection.png" class="png" mode="aspectFit"></image>
+          <text class="text-grey">收藏单词</text>
+        </navigator>
       </view>
     </view>
     <view class="cu-item {{menuArrow?'arrow':''}}">
       <view class="content">
-      <navigator class="content" hover-class="none" url="../record/record"  open-type="navigate">
-        <image src="/package/icons/record.png" class="png" mode="aspectFit"></image>
-        <text class="text-grey">翻译记录</text>
-      </navigator>
+        <navigator class="content" hover-class="none" url="../record/record" open-type="navigate">
+          <image src="/package/icons/record.png" class="png" mode="aspectFit"></image>
+          <text class="text-grey">翻译记录</text>
+        </navigator>
       </view>
     </view>
     <view class="cu-item {{menuArrow?'arrow':''}}">

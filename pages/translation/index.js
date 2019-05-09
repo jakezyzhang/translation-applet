@@ -179,7 +179,7 @@ Page({
           },
           method: 'POST',
           header: {
-            'content-type': 'application/x-www-form-urlencoded',
+            'content-type': 'application/json',
             'Cookie': 'JSESSIONID=' + app.globalData.sessionid
           },
           success: function(res) {

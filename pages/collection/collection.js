@@ -5,7 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sessionId: undefined,
     list: []
   },
 
@@ -32,7 +31,7 @@ Page({
           });
         } else {
           wx.request({
-            url: app.globalData.urlPath + '/Word/querywordbyopenid',
+            url: app.globalData.urlPath + '/Word/querywordwithcollection',
             data: {},
             method: 'GET',
             header: {
@@ -40,9 +39,9 @@ Page({
               'Cookie': 'JSESSIONID=' + app.globalData.sessionid
             },
             success: function(res) {
-              console.log(res.data.listWord)
+              console.log(res.data.listCollectionWord)
               that.setData({
-                list: res.data.listWord
+                list: res.data.listCollectionWord
               })
             }
           });
@@ -128,36 +127,19 @@ Page({
       ListTouchDirection: null
     })
   },
-  onDelete: function(e) {
-    console.log(e.target.dataset.wordid)
-    wx.request({
-      url: app.globalData.urlPath + '/Word/modifywithdelete',
-      data: {
-        isDelete: 1,
-        wordId: e.target.dataset.wordid
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function(res) {
-        console.log(res.data)
-      }
-    })
-  },
-  onColletion: function(e) {
+  onDeleteCollection:function(e){
     console.log(e.target.dataset.wordid)
     wx.request({
       url: app.globalData.urlPath + '/Word/modifywithcollection',
       data: {
-        isColletion: 1,
+        isColletion: 0,
         wordId: e.target.dataset.wordid
       },
       method: 'GET',
       header: {
         'content-type': 'application/json'
       },
-      success: function(res) {
+      success: function (res) {
         console.log(res.data)
       }
     })
