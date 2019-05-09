@@ -31,7 +31,7 @@ public class WordController {
     }
 
     @RequestMapping(value = "/addword", method = RequestMethod.POST)
-    private Map<String, Object> addWord(Word word, @CookieValue("JSESSIONID") String sessionId){
+    private Map<String, Object> addWord(@RequestBody Word word, @CookieValue("JSESSIONID") String sessionId){
         Map<String, Object> modelMap = new HashMap<String, Object>();
         MySessionContext mySessionContext = MySessionContext.getInstance();
         HttpSession session = mySessionContext.getSession(sessionId);
@@ -42,11 +42,20 @@ public class WordController {
         sb.append(wxInfo.getOpenId());
         String wordId = MD5.stringMD5(sb.toString());
         word.setWordId(wordId);
-        if (wordService.queryWordByWordId(wordId) != null ){
+        Word queryWord = wordService.queryWordByWordId(wordId);
+        int isDelete = 0;
+        if (queryWord != null ){
+            isDelete = wordService.queryWordByWordId(wordId).getIsDelete();
+        }
+        if (null !=  queryWord && isDelete == 1 ){
+            word.setIsDelete(0);
+            modelMap.put("success", wordService.modifyWithDelete(word));
+            return modelMap;
+        }else if (null != queryWord && isDelete == 0){
             return null;
-        }else {
-
+        } else {
             word.setOpenId(wxInfo.getOpenId());
+            System.out.println(word.getOpenId());
             boolean flag = wordService.addWord(word);
             modelMap.put("success", flag);
             return modelMap;
@@ -65,11 +74,11 @@ public class WordController {
         return modelMap;
     }
 
-    @RequestMapping(value = "/modifywithcolletion", method = RequestMethod.GET)
-    private Map<String, Object> modifyWithColletion(Word word){
+    @RequestMapping(value = "/modifywithcollection", method = RequestMethod.GET)
+    private Map<String, Object> modifyWithCollection(Word word){
         Map<String, Object> modelMap = new HashMap<String, Object>();
         //收藏单词
-        modelMap.put("success", wordService.modifyWithColletion(word));
+        modelMap.put("success", wordService.modifyWithCollection(word));
         return modelMap;
     }
 
@@ -81,4 +90,14 @@ public class WordController {
         return modelMap;
     }
 
+    @RequestMapping(value = "/querywordwithcollection", method = RequestMethod.GET)
+    private Map<String, Object> queryWordWithCollection(@CookieValue("JSESSIONID") String sessionId){
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        MySessionContext mySessionContext = MySessionContext.getInstance();
+        HttpSession session = mySessionContext.getSession(sessionId);
+        WxInfo wxInfo = (WxInfo) session.getAttribute("WxInfo");
+        List<Word> listCollectionWord = wordService.queryWordWithCollection(wxInfo.getOpenId());
+        modelMap.put("listCollectionWord", listCollectionWord);
+        return modelMap;
+    }
 }

@@ -38,7 +38,7 @@ public interface WordDao {
      * @param word
      * @return
      */
-    int updateWithColletion(Word word);
+    int updateWithCollection(Word word);
 
     /**
      * 通过改变is_delete字段起到删除的功能
@@ -46,4 +46,11 @@ public interface WordDao {
      * @return
      */
     int updateWithDelete(Word word);
+
+    /**
+     * 收藏的单词列表
+     * @param openId
+     * @return
+     */
+    List<Word> queryWordWithCollection(String openId);
 }

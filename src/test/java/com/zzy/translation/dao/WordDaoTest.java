@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -46,5 +48,12 @@ public class WordDaoTest {
         System.out.println(word.getWordId());
         boolean flag = wordService.modifyWithDelete(word);
         assertEquals(true, flag);
+    }
+    @Test
+    public void queryWordWithCollection(){
+        Word word = new Word();
+        word.setOpenId("ousP54gfHHkcQPjxtoR-B_cze3T4");
+        List<Word> wordList = wordService.queryWordWithCollection(word.getOpenId());
+        assertEquals(2, wordList.size());
     }
 }

@@ -44,7 +44,7 @@ public interface WordService {
      * @param word
      * @return
      */
-    boolean modifyWithColletion(Word word);
+    boolean modifyWithCollection(Word word);
 
     /**
      * 通过改变is_delete字段起到删除的功能
@@ -52,4 +52,11 @@ public interface WordService {
      * @return
      */
     boolean modifyWithDelete(Word word);
+
+    /**
+     * 收藏的单词列表
+     * @param word
+     * @return
+     */
+    List<Word> queryWordWithCollection(String openId);
 }

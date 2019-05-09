@@ -88,11 +88,11 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public boolean modifyWithColletion(Word word) {
+    public boolean modifyWithCollection(Word word) {
         if (word.getWordId() != null && !"".equals(word.getWordId())){
-            word.setLastEditTime(new Date());
+//            word.setLastEditTime(new Date());
             try {
-                int effectedNum = wordDao.updateWithColletion(word);
+                int effectedNum = wordDao.updateWithCollection(word);
                 if (effectedNum > 0){
                     return true;
                 }else {
@@ -123,5 +123,10 @@ public class WordServiceImpl implements WordService {
         }else {
             throw new RuntimeException("单词id为空！");
         }
+    }
+
+    @Override
+    public List<Word> queryWordWithCollection(String openId) {
+        return wordDao.queryWordWithCollection(openId);
     }
 }

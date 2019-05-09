@@ -7,9 +7,9 @@
         INSERT INTO
         tb_word(word_id, open_id, query, trans_src,
         trans_dst, from_word, to_word, status_code, create_time,
-        last_edit_time, is_colletion, is_delete)
+        last_edit_time, is_collection, is_delete)
         VALUE
-        (#{wordId}, #{openId}, #{query}, #{transSrc}, #{transDst}, #{fromWord}, #{toWord}, #{statusCode}, #{createTime}, #{lastEditTime}, #{isColletion}, #{isDelete})
+        (#{wordId}, #{openId}, #{query}, #{transSrc}, #{transDst}, #{fromWord}, #{toWord}, #{statusCode}, #{createTime}, #{lastEditTime}, #{isCollection}, #{isDelete})
     </insert>
     <delete id="deleteWord">
       DELETE FROM
@@ -21,7 +21,7 @@
         SELECT
         id, word_id, open_id, query, trans_src,
         trans_dst, from_word, to_word, status_code, create_time,
-        last_edit_time, is_colletion, is_delete
+        last_edit_time, is_collection, is_delete
         FROM tb_word
         WHERE
         open_id=#{OpenId}
@@ -34,15 +34,28 @@
         SELECT
         id, word_id, open_id, query, trans_src,
         trans_dst, from_word, to_word, status_code, create_time,
-        last_edit_time, is_colletion, is_delete
+        last_edit_time, is_collection, is_delete
         FROM tb_word
         WHERE
         word_id=#{wordId}
     </select>
-    <update id="updateWithColletion" parameterType="com.zzy.translation.entity.Word">
+    <select id="queryWordWithCollection" resultType="com.zzy.translation.entity.Word">
+        SELECT
+        id, word_id, open_id, query, trans_src,
+        trans_dst, from_word, to_word, status_code, create_time,
+        last_edit_time, is_collection, is_delete
+        FROM tb_word
+        WHERE
+        open_id = #{openId}
+        AND
+        is_collection = '1'
+        ORDER BY create_time
+        DESC
+    </select>
+    <update id="updateWithCollection" parameterType="com.zzy.translation.entity.Word">
         UPDATE tb_word
         <set>
-            <if test="isCollection!=null">is_colletion=#{isColletion}</if>
+            <if test="isCollection!=null">is_collection=#{isCollection}</if>
             <if test="lastEditTime!=null">last_edit_time=#{lastEditTime}</if>
         </set>
         WHERE word_id = #{wordId}

@@ -14,7 +14,7 @@ public class Word {
     private String statusCode;
     private Date createTime;
     private Date lastEditTime;
-    private int isColletion;
+    private int isCollection;
     private int isDelete;
 
     public Date getCreateTime() {
@@ -105,12 +105,12 @@ public class Word {
         this.statusCode = statusCode;
     }
 
-    public int getIsColletion() {
-        return isColletion;
+    public int getIsCollection() {
+        return isCollection;
     }
 
     public void setIsColletion(int isColletion) {
-        this.isColletion = isColletion;
+        this.isCollection = isColletion;
     }
 
     public int getIsDelete() {
