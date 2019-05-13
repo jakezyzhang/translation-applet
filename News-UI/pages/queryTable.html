@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>菜单管理</title>
+		<!-- Bootstrap core CSS -->
+		<link href="../css/bootstrap.css" rel="stylesheet">
+		<link href="../css/index.css" rel="stylesheet">
+		<link href="../css/config.css" rel="stylesheet">
+		<link href="../css/font-awesome.min.css" rel="stylesheet">
+		<link href="../css/jquery.pagination.css" rel="stylesheet">
+		<link rel="stylesheet" href="../layui/css/layui.css">
+		<link rel="stylesheet" href="../css/login.css" />
+		<script src="../layui/layui.js"></script>
+		<script src="../js/login.js"></script>
+		<script src="../js/jquery-3.3.1.min.js"></script>
+		<script src="../js/jquery.slimscroll.min.js"></script>
+		<script src="../js/bootstrap.js"></script>
+		<script src="../js/jquery.pagination.min.js"></script>
+		<script src="../js/queryTable.js"></script>
+		
+	</head>
+
+	<body>
+		<!-- nav导航 -->
+		<nav class="navbar navbar-inverse bdr-n z-ind">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">后台管理平台</a>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">admin
+								<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li onclick="logout()"><a href="#">退出</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- 页面主体 -->
+		<div class="dh mainbox">
+			<!-- 左边菜单 -->
+			<div class="navleft leftnav-bgc">
+				<dl class="list_dl">
+					<dt class="list_dt">
+						<span class="_after"></span>
+						<p>基础菜单</p>
+						<i class="list_dt_icon"></i>
+					</dt>
+					<dd class="list_dd">
+						<ul>
+							<li class="list_li">
+								<a class="list_a" href="queryTable.html">菜单管理</a>
+							</li>
+							<li class="list_li">
+								<a class="list_a" href="increaseOrEditor.html">添加文章</a>
+							</li>
+							<li class="list_li">
+								<a class="list_a" href="fileTree.html">角色管理</a>
+							</li>
+						</ul>
+					</dd>
+				</dl>
+			</div>
+			<!-- 右边主显示部分 -->
+			<div class="main-rightbox">
+				<table class="layui-hide" id="reg_data_table" lay-filter="reg_data_table"></table>
+			</div>
+			<div class="">
+				<script type="text/html" id="bar">
+					<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+					<a class="layui-btn layui-btn-xs" lay-event="edit" >编辑</a>
+				</script>
+			</div>
+		</div>
+		</div>
+		<!-- 引入公共js文件 -->
+		<script>
+			/**
+			 *  此方法为切换左边菜单的js文件
+			 */
+			$(".list_dt").on("click", function() {
+				$('.list_dd').stop();
+				$(this).siblings("dt").removeAttr("id");
+				if ($(this).attr("id") == "open") {
+					$(this).removeAttr("id").siblings("dd").slideUp();
+				} else {
+					$(this).attr("id", "open").next().slideDown().siblings("dd").slideUp();
+				}
+			});
+			/**
+			 * 退出登录
+			 */
+			function logout() {
+				window.location.href = "login.html";
+			};
+			/**
+			 * 此方法为分页插件提供方法 
+			 * 分页功能
+			 * 参考文档  http://www.jq22.com/jquery-info15113
+			 */
+			$(function() {
+				$("#pagination3").pagination({
+					currentPage: 1,
+					totalPage: 1600,
+					isShow: true,
+					count: 7,
+					homePageText: "首页",
+					endPageText: "尾页",
+					prevPageText: "上一页",
+					nextPageText: "下一页",
+					callback: function(current) {
+						/**
+						 * 回调函数，请求数据 
+						 * current为页面数
+						 */
+						$("#current3").text(current);
+						alert("请求数据" + current);
+					}
+				});
+
+				$("#getPage").on("click", function() {
+					var info = $("#pagination3").pagination("getPage");
+					alert("当前页数：" + info.current + ",总页数：" + info.total);
+				});
+
+				$("#setPage").on("click", function() {
+					$("#pagination3").pagination("setPage", 1, 10);
+				});
+			});
+
+			/**
+			 * 页面挂载数据方法 
+			 */
+			function getdata() {
+
+			}
+
+			function addfun() {
+				window.location.href = "increaseOrEditor.html";
+			}
+
+			function editfun() {
+				window.location.href = "increaseOrEditor.html";
+			}
+		</script>
+	</body>
+
+</html>
