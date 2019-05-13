@@ -4,7 +4,7 @@ layui.use(['jquery', 'form', 'layer'], function() {
 	var layer = layui.layer;
 
 	//监听提交
-	form.on('submit(login)', function(data) {
+	form.on('submit(register)', function(data) {
 		var username = data.field.username;
 		var password = data.field.password;
 		var nickname = data.field.nickname;
@@ -48,7 +48,7 @@ layui.use(['jquery', 'form', 'layer'], function() {
 						btn: '关闭全部',
 						btnAlign: 'c' ,
 						shade: 0 ,
-						success: function() {
+						yes: function() {
 							$(window).attr("location","login.html");
 						}
 					});

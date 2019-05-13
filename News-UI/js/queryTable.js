@@ -2,13 +2,13 @@ layui.use(['table', 'jquery'], function() {
 	var $ = layui.jquery;
 	var table = layui.table;
 	downDatas = []
-
+	
 	table.render({
 		elem: '#reg_data_table',
 		url: 'http://localhost:8086/translation/Article/queryArticle'
 			// , toolbar: '#toolbar1'
 			,
-		title: '注册队伍数据表',
+		title: '新闻列表',
 		cols: [
 			[{
 					field: 'rLongTitle',
@@ -21,7 +21,7 @@ layui.use(['table', 'jquery'], function() {
 					width: 150
 				},
 				{
-					field: 'rPublish',
+					field: 'publishInfo',
 					title: '是否发布',
 					width: 150
 				},
@@ -105,9 +105,10 @@ layui.use(['table', 'jquery'], function() {
 					// for (var i = 0; i < inputList.length; i++) {
 					// 	$(inputList[i]).val(editList[i]); //遍历子窗口的input标签，将之前数组中的值一次放入显示
 					// }
-					$(inputList[0]).val(editList[2]);
-					$(inputList[1]).val(editList[5]);
-					$(inputList[2]).val(editList[9]);
+					$(inputList[0]).val(editList[3]);
+					$(inputList[1]).val(editList[4]);
+					$(inputList[2]).val(editList[6]);
+					$(inputList[3]).val(editList[7]);
 				}
 			});
 		}
