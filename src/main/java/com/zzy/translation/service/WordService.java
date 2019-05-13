@@ -55,7 +55,7 @@ public interface WordService {
 
     /**
      * 收藏的单词列表
-     * @param word
+     * @param openId
      * @return
      */
     List<Word> queryWordWithCollection(String openId);

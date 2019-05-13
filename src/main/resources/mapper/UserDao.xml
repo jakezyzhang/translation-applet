@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzy.translation.dao.UserDao">
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id" parameterType="com.zzy.translation.entity.User">
+        INSERT INTO
+        tb_user(user_id, power, user_name, pass_word, nick_name,
+        phone, gender, create_time, last_edit_time)
+        VALUE
+        (#{userId}, #{power}, #{userName}, #{passWord}, #{nickName},
+        #{phone}, #{gender}, #{createTime}, #{lastEditTime})
+    </insert>
+    <select id="queryUserByUserName" resultType="com.zzy.translation.entity.User">
+        SELECT user_id, power, user_name, pass_word, nick_name,
+        phone, gender, create_time, last_edit_time
+        FROM tb_user
+        WHERE
+        user_name = #{userName}
+    </select>
+    <select id="queryUserByUser" resultType="com.zzy.translation.entity.User">
+        SELECT user_id, power, user_name, pass_word, nick_name,
+        phone, gender, create_time, last_edit_time
+        FROM tb_user
+        WHERE
+        user_name = #{userName}
+        AND
+        pass_word = #{passWord}
+    </select>
+</mapper>

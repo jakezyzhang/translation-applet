@@ -1,22 +1,22 @@
 package com.zzy.translation.entity;
 
 public class User {
-
-    private int id;
+    private Integer id;
     private String userId;
-    private String openId;
-    private int power;
+    private Integer power;
     private String userName;
     private String passWord;
     private String nickName;
-    private String avatarUrl;
-    private int gender;
+    private String phone;
+    private Integer gender;
+    private String createTime;
+    private String lastEditTime;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -28,19 +28,11 @@ public class User {
         this.userId = userId;
     }
 
-    public String getOpenId() {
-        return openId;
-    }
-
-    public void setOpenId(String openId) {
-        this.openId = openId;
-    }
-
-    public int getPower() {
+    public Integer getPower() {
         return power;
     }
 
-    public void setPower(int power) {
+    public void setPower(Integer power) {
         this.power = power;
     }
 
@@ -68,19 +60,35 @@ public class User {
         this.nickName = nickName;
     }
 
-    public String getAvatarUrl() {
-        return avatarUrl;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public int getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getLastEditTime() {
+        return lastEditTime;
+    }
+
+    public void setLastEditTime(String lastEditTime) {
+        this.lastEditTime = lastEditTime;
     }
 }

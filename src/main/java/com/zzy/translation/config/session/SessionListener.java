@@ -1,6 +1,5 @@
 package com.zzy.translation.config.session;
 
-import com.zzy.translation.entity.WxInfo;
 
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
