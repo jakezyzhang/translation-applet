@@ -46,10 +46,5 @@ public interface UserService {
      */
     User getUserByUserName(User user);
 
-    /**
-     * 根据username和password列出用户信息
-     * @param user
-     * @return
-     */
-    User getUserByUser(User user);
+    boolean checkPwdByUserName(User user);
 }

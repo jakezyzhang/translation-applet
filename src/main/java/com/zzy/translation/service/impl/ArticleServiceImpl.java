@@ -41,7 +41,15 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> queryArticle() {
-        return articleDao.queryArticle();
+        List<Article> listArticle = articleDao.queryArticle();
+        for (int i = 0; i < listArticle.size(); i ++){
+            if (listArticle.get(i).getrPublish() == 1){
+                listArticle.get(i).setPublishInfo("已发布");
+            }else if (listArticle.get(i).getrPublish() == 0){
+                listArticle.get(i).setPublishInfo("未发布");
+            }
+        }
+        return listArticle;
     }
 
     @Override
@@ -71,6 +79,22 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public boolean modifyArticle(Article article) {
-        return false;
+        if (article.getrId() != null && !"".equals(article.getrId())){
+            SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm");
+            article.setLastEditTime(df.format(new Date()));
+            try {
+                int effectedNum = articleDao.updateArticle(article);
+                if (effectedNum > 0){
+                    return true;
+                }else {
+                    throw new RuntimeException("更新文章失败！");
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("更新文章失败！" + e.getMessage());
+            }
+        }else {
+            throw new RuntimeException("新闻的rid不能为空！");
+        }
+
     }
 }

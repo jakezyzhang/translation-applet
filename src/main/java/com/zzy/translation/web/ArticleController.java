@@ -2,12 +2,10 @@ package com.zzy.translation.web;
 
 import com.zzy.translation.api.MD5;
 import com.zzy.translation.entity.Article;
+import com.zzy.translation.entity.User;
 import com.zzy.translation.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -35,6 +33,8 @@ public class ArticleController {
         sb.append(new Date().getTime());
         String rId = MD5.stringMD5(sb.toString());
         article.setrId(rId);
+//        User loginUser = (User) request.getSession().getAttribute("loginUser");
+//        article.setrAuthor(loginUser.getUserName());
         boolean flag = articleService.addArticle(article);
         modelMap.put("success", flag);
         return modelMap;
@@ -63,6 +63,13 @@ public class ArticleController {
     private Map<String, Object>modifyArticleByStatus(Article article){
         Map<String, Object> modelMap = new HashMap<String, Object>();
         modelMap.put("success", articleService.modifyArticleByStatus(article));
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/modifyarticle", method = RequestMethod.POST)
+    private Map<String, Object>modifyArticle( Article article){
+        Map<String, Object>modelMap = new HashMap<String, Object>();
+        modelMap.put("success", articleService.modifyArticle(article));
         return modelMap;
     }
 }

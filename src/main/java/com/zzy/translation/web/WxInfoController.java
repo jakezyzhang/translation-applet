@@ -29,10 +29,8 @@ public class WxInfoController {
         wxInfo.setOpenId(openId);
         HttpSession httpSession = request.getSession();
         httpSession.setAttribute("WxInfo", wxInfo);
-        System.out.println(httpSession.getId());
         wxInfo.setSessionId(httpSession.getId());
         modelMap.put("WxInfo", wxInfo);
-        System.out.println(wxInfo.getOpenId());
         return modelMap;
     }
     @RequestMapping(value = "/getsessionid", method = RequestMethod.GET)

@@ -19,13 +19,13 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Object loginName = request.getSession().getAttribute("loginName");
-        if (null == loginName || "".equals(loginName)){
-            response.sendRedirect("http://127.0.0.1:8848/News-UI/pages/error.html");
-            return false;
-        }
-        String userName = (String) loginName;
-        System.out.println(userName);
+//        Object loginName = request.getSession().getAttribute("loginName");
+//        if (null == loginName || "".equals(loginName)){
+//            response.sendRedirect("http://127.0.0.1:8848/News-UI/pages/error.html");
+//            return false;
+//        }
+//        String userName = (String) loginName;
+//        System.out.println(userName);
         return true;
     }
 

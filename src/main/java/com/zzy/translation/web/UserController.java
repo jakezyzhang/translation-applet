@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,16 +22,10 @@ public class UserController {
     private HttpServletRequest request;
     @Autowired
     private UserService userService;
-    @RequestMapping(value = "/login")
-    private ModelAndView login(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:http://127.0.0.1:8848/News-UI/pages/login.html");
-        return modelAndView;
-    }
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
     private Map<String, Object>addUser(User user){
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        User exUser =  userService.getUserByUserName(user.getUserName());
+        User exUser =  userService.getUserByUserName(user);
         if (exUser != null){
             modelMap.put("result", "该用户名已被注册");
             return modelMap;
@@ -39,4 +34,17 @@ public class UserController {
         modelMap.put("success", flag);
         return modelMap;
     }
+
+    @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
+    private Map<String, Object>loginUser(User user){
+        Map<String, Object>modelMap = new HashMap<String, Object>();
+        boolean flag = userService.checkPwdByUserName(user);
+        User loginUser = userService.getUserByUserName(user);
+        request.getSession().setAttribute("loginUser", loginUser);
+        modelMap.put("success", flag);
+        modelMap.put("user", loginUser);
+        return modelMap;
+    }
+
+
 }

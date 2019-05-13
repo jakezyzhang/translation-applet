@@ -44,6 +44,20 @@
         WHERE r_id=#{rId}
     </update>
     <update id="updateArticle" parameterType="com.zzy.translation.entity.Article">
-
+        UPDATE tb_article
+        <set>
+            <if test="rId!=null">r_id=#{rId},</if>
+            <if test="userId!=null">user_id=#{userId},</if>
+            <if test="rLongTitle!=null">r_long_title=#{rLongTitle},</if>
+            <if test="rSubheading!=null">r_subheading=#{rSubheading},</if>
+            <if test="rAuthor!=null">r_author=#{rAuthor},</if>
+            <if test="rSummary!=null">r_summary=#{rSummary},</if>
+            <if test="rContent!=null">r_content=#{rContent},</if>
+            <if test="createTime!=null">create_time=#{createTime},</if>
+            <if test="rPublish!=null">r_publish=#{rPublish},</if>
+            <if test="rStatus!=null">r_status=#{rStatus},</if>
+            <if test="lastEditTime!=null">last_edit_time=#{lastEditTime}</if>
+        </set>
+        WHERE r_id=#{rId}
     </update>
 </mapper>

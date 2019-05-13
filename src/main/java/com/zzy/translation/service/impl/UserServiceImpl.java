@@ -69,15 +69,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByUserName(User user) {
+        return userDao.queryUserByUserName(user);
+    }
+
+    @Override
+    public boolean checkPwdByUserName(User user) {
         if (user.getUserName() != null && !"".equals(user.getUserName())){
-            User checkUser = userDao.queryUserByUserName(user);
-            String checkPwd = checkUser.getPassWord();
-            StringBuilder pwd = new StringBuilder();
-            pwd.append(user.getPassWord());
-            pwd.append(SIGN);
             try {
+                User checkUser = userDao.queryUserByUserName(user);
+                if (checkUser == null ){
+                    throw new RuntimeException("用户名不存在！");
+                }
+                String checkPwd = checkUser.getPassWord();
+                StringBuilder pwd = new StringBuilder();
+                pwd.append(user.getPassWord());
+                pwd.append(SIGN);
                 if (checkPwd.equals(MD5.stringMD5(pwd.toString()))){
-                    return checkUser;
+                    return true;
                 }else {
                     throw new RuntimeException("账号或者密码输入有误！");
                 }
@@ -89,8 +97,4 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public User getUserByUser(User user) {
-        return null;
-    }
 }

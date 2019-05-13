@@ -19,13 +19,6 @@ public interface UserDao {
     User queryUserByUserId(String userId);
 
     /**
-     * 根据username和password列出用户信息
-     * @param user
-     * @return
-     */
-    User queryUserByUser(User user);
-
-    /**
      * 插入用户信息
      * @param user
      * @return
@@ -52,5 +45,12 @@ public interface UserDao {
      * @return
      */
     User queryUserByUserName(User user);
+
+    /**
+     * 验证密码
+     * @param user
+     * @return
+     */
+    User checkPwdByUserName(User user);
 
 }

@@ -25,7 +25,12 @@
         FROM tb_user
         WHERE
         user_name = #{userName}
-        AND
-        pass_word = #{passWord}
+    </select>
+    <select id="checkPwdByUserName" resultType="com.zzy.translation.entity.User">
+        SELECT user_id, power, user_name, pass_word, nick_name,
+        phone, gender, create_time, last_edit_time
+        FROM tb_user
+        WHERE
+        user_name = #{userName}
     </select>
 </mapper>

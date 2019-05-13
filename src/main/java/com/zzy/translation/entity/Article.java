@@ -4,6 +4,7 @@ public class Article {
 
     private int id;
     private String rId;
+    private String userId;
     private String rLongTitle;
     private String rSubheading;
     private String rAuthor;
@@ -13,7 +14,7 @@ public class Article {
     private String lastEditTime;
     private int rPublish;
     private int rStatus;
-
+    private String publishInfo;
     public int getId() {
         return id;
     }
@@ -28,6 +29,14 @@ public class Article {
 
     public void setrId(String rId) {
         this.rId = rId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getrLongTitle() {
@@ -100,5 +109,13 @@ public class Article {
 
     public void setrStatus(int rStatus) {
         this.rStatus = rStatus;
+    }
+
+    public String getPublishInfo() {
+        return publishInfo;
+    }
+
+    public void setPublishInfo(String publishInfo) {
+        this.publishInfo = publishInfo;
     }
 }
