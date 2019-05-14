@@ -33,8 +33,8 @@ public class ArticleController {
         sb.append(new Date().getTime());
         String rId = MD5.stringMD5(sb.toString());
         article.setrId(rId);
-//        User loginUser = (User) request.getSession().getAttribute("loginUser");
-//        article.setrAuthor(loginUser.getUserName());
+        User loginUser = (User) request.getSession().getAttribute("loginUser");
+        article.setrAuthor(loginUser.getUserName());
         boolean flag = articleService.addArticle(article);
         modelMap.put("success", flag);
         return modelMap;

@@ -18,6 +18,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin
 public class UserController {
+
     @Autowired
     private HttpServletRequest request;
     @Autowired
@@ -45,6 +46,11 @@ public class UserController {
         modelMap.put("user", loginUser);
         return modelMap;
     }
-
+    @RequestMapping(value = "/getSession",method = RequestMethod.GET)
+    private String getSession(){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("loginUser");
+        return user.getUserName();
+    }
 
 }

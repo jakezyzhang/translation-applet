@@ -14,15 +14,16 @@ public class LoginConfiguration implements WebMvcConfigurer, HandlerInterceptor 
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration loginRegistry = registry.addInterceptor(loginInterceptor);
         //拦截路径
-//        loginRegistry.addPathPatterns("/**");
+//        loginRegistry.addPathPatterns("/Article/queryArticle");
         //排除路径
         loginRegistry.excludePathPatterns("/**");
-//        loginRegistry.excludePathPatterns("/login");
-//        //排除资源请求
+//        loginRegistry.excludePathPatterns("/User/loginUser");
+//        loginRegistry.excludePathPatterns("/pages/register.html");
+////        //排除资源请求
 //        loginRegistry.excludePathPatterns("/css/*.css");
-//        loginRegistry.excludePathPatterns("fonts/**");
-//        loginRegistry.excludePathPatterns("images/**");
-//        loginRegistry.excludePathPatterns("jQuery/*.js");
+//        loginRegistry.excludePathPatterns("/fonts/**");
+//        loginRegistry.excludePathPatterns("/images/**");
+//        loginRegistry.excludePathPatterns("/jQuery/*.js");
 //        loginRegistry.excludePathPatterns("/js/*.js");
 //        loginRegistry.excludePathPatterns("/layui/**");
 

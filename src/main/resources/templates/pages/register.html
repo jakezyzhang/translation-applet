@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>注册</title>
+		<link rel="stylesheet" href="/translation/static/layui/css/layui.css">
+		<link rel="stylesheet" href="/translation/static/css/register.css" />
+		<script src="/translation/static/layui/layui.js"></script>
+		<script src="/translation/static/js/register.js"></script>
+	</head>
+	<body>
+		<div class="register">
+			<form class="layui-form " action="" >
+				<div class="layui-row">
+					<div class="layui-col-md4 layui-form-item">
+						<div class="grid-demo grid-demo-bg1">
+							<input type="text" id="username" name="username" required lay-verify="required|username" placeholder="请输入账号"
+							 autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-col-md4 layui-form-item">
+						<div class="grid-demo grid-demo-bg1">
+							<input type="password" id="password" name="password" required lay-verify="required|password" placeholder="请输入密码"
+							 autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-col-md4 layui-form-item">
+						<div class="grid-demo grid-demo-bg1">
+							<input type="text" id="nickname" name="nickname" required lay-verify="required" placeholder="请输入昵称" autocomplete="off"
+							 class="layui-input">
+						</div>
+					</div>
+					<div class="layui-col-md4 layui-form-item">
+						<div class="grid-demo grid-demo-bg1">
+							<input type="phone" id="phone" name="phone" required lay-verify="required|phone" placeholder="请输入电话"
+							 autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					
+					<div class="layui-col-md4 layui-form-item">
+					<label class="layui-form-label layui-col-md4">角色</label>	
+						<div class="layui-input-block grid-demo grid-demo-bg1">
+							<select name="role" lay-verify="required">
+								<option value=""></option>
+								<option value="0">管理员</option>
+								<option value="1">普通用户</option>
+								<option value="2">开发者</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-col-md4 layui-form-item">
+						<label class="layui-form-label layui-col-md4">性别</label>	
+						<div class="grid-demo grid-demo-bg1">
+							<div class="layui-input-block">
+								<input type="radio" name="sex" value="0" title="男" lay-filter="sex">
+								<input type="radio" name="sex" value="1" title="女" checked lay-filter="sex">
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="layui-col-md3">
+					<button class="layui-btn layui-btn-fluid" lay-submit lay-filter="register">注册</button>
+				</div>
+				<div class="layui-col-md3">
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>
