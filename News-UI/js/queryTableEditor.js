@@ -15,7 +15,6 @@ layui.use(['jquery', 'form', 'layer', 'table', 'layedit'], function() {
 		} else {
 			publish = 0
 		}
-		alert(rid)
 		$.ajax({
 			url: "http://localhost:8086/translation/Article/modifyarticle",
 			type: "post",
@@ -35,7 +34,8 @@ layui.use(['jquery', 'form', 'layer', 'table', 'layedit'], function() {
 						title: '编辑',
 						content: '修改新闻成功',
 						yes:function(){
-							$(window).attr("location","queryTable.html");
+							layer.close(layer.index);
+							window.parent.location.reload(); //重新加载父页面，进行数据刷新
 						}
 					});
 				}else{

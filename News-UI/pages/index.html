@@ -124,8 +124,6 @@
 
 		<script>
 			// 此方法为切换左边菜单的js文件
-
-
 			$(".list_dt").on("click", function() {
 				$('.list_dd').stop();
 				$(this).siblings("dt").removeAttr("id");
@@ -137,6 +135,32 @@
 			});
 			// 退出
 			function logout() {
+				$.ajax({
+					url: 'http://localhost:8086/translation/User/loginUser',
+					type: "POST",
+					cache: false,
+					data: {
+						"userName": data.field.username,
+						"passWord": data.field.password
+					},
+					success: function(data) {
+						if (data.success == true) {
+							$(window).attr("location", "queryTable.html");
+						} else {
+							layer.open({
+								type: 1,
+								offset: 'auto',
+								content: '<div style="padding: 20px 100px;">' + data.errMsg + '</div>',
+								btn: '关闭全部',
+								btnAlign: 'c' ,
+								shade: 0 ,
+								yes: function() {
+									layer.closeAll();
+								}
+							});
+						}
+					}
+				});
 				window.location.href = "login.html";
 			}
 		</script>

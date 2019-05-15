@@ -5,9 +5,7 @@ layui.use(['table', 'jquery'], function() {
 	
 	table.render({
 		elem: '#reg_data_table',
-		url: 'http://localhost:8086/translation/Article/queryArticle'
-			// , toolbar: '#toolbar1'
-			,
+		url: 'http://localhost:8086/translation/Article/queryArticle',
 		title: '新闻列表',
 		cols: [
 			[{
@@ -38,10 +36,16 @@ layui.use(['table', 'jquery'], function() {
 				}
 			]
 		],
+		parseData: function(res){
+			return {
+				"code":res.status,
+			};
+			
+		},
 		page: true,
 		limit: 15,
 		limits: [15, 30, 45, 60, 75, 90]
-
+		
 	});
 	table.on('tool(reg_data_table)', function(obj) {
 		// alert(obj.data['rId'])
