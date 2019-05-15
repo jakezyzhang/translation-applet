@@ -28,7 +28,7 @@ layui.use(['jquery', 'form', 'layer'], function() {
 					title: '编辑',
 					content: '添加文章成功',
 					yes:function(){
-						$(window).attr("location","queryTable.html");
+						$(window).attr("location","queryTable");
 					}
 				});
 				

@@ -1,5 +1,6 @@
 package com.zzy.translation.web;
 
+import com.zzy.translation.config.session.MySessionContext;
 import com.zzy.translation.entity.User;
 import com.zzy.translation.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,16 +42,28 @@ public class UserController {
         Map<String, Object>modelMap = new HashMap<String, Object>();
         boolean flag = userService.checkPwdByUserName(user);
         User loginUser = userService.getUserByUserName(user);
-        request.getSession().setAttribute("loginUser", loginUser);
+        HttpSession session = request.getSession();
+        System.out.println("loginUser " + session.getId());
+        session.setAttribute("loginUser", loginUser);
         modelMap.put("success", flag);
         modelMap.put("user", loginUser);
         return modelMap;
     }
     @RequestMapping(value = "/getSession",method = RequestMethod.GET)
-    private String getSession(){
+    private Map<String, Object> getSession(){
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        HttpSession session1 = request.getSession();
+        System.out.println("getSession " + session1);
+        modelMap.put("sessionId", session1.getId());
+        return modelMap;
+    }
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public Map<String, Object>logOut(){
+        Map<String, Object>modelMap = new HashMap<String, Object>();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("loginUser");
-        return user.getUserName();
+        session.invalidate();
+        modelMap.put("sessionId", session.getId());
+        return modelMap;
     }
 
 }

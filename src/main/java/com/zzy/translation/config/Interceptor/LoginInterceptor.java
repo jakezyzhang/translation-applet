@@ -1,5 +1,6 @@
 package com.zzy.translation.config.Interceptor;
 
+import com.zzy.translation.config.session.MySessionContext;
 import com.zzy.translation.entity.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -20,15 +21,19 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        User loginUser = (User) request.getSession().getAttribute("loginUser");
-
+        HttpSession session = request.getSession(false);
+        if (session == null){
+            response.sendRedirect("http://localhost:8086/translation/Pages/login");
+            return false;
+        }
+        User loginUser = (User) session.getAttribute("loginUser");
         if (loginUser == null){
-            response.sendRedirect("http://127.0.0.1:8848/News-UI/pages/login.html");
+            response.sendRedirect("http://localhost:8086/translation/Pages/login");
             return false;
         }
         String userName = loginUser.getUserName();
         if (null == userName || "".equals(userName)){
-            response.sendRedirect("http://127.0.0.1:8848/News-UI/pages/login.html");
+            response.sendRedirect("http://localhost:8086/translation/Pages/login");
             return false;
         }
         return true;

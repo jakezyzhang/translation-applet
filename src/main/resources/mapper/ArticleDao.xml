@@ -6,16 +6,16 @@
     <insert id="insertArticle" useGeneratedKeys="true" keyProperty="id"
             keyColumn="id" parameterType="com.zzy.translation.entity.Article">
         INSERT INTO
-        tb_article(r_id, r_long_title,
+        tb_article(r_id, user_id, r_long_title,
         r_subheading, r_author, r_summary,
         r_content, create_time, last_edit_time,
         r_publish, r_status)
         VALUE
-        (#{rId}, #{rLongTitle}, #{rSubheading}, #{rAuthor}, #{rSummary}, #{rContent}, #{createTime}, #{lastEditTime}, #{rPublish}, #{rStatus})
+        (#{rId}, #{userId}, #{rLongTitle}, #{rSubheading}, #{rAuthor}, #{rSummary}, #{rContent}, #{createTime}, #{lastEditTime}, #{rPublish}, #{rStatus})
     </insert>
     <select id="queryArticle" resultType="com.zzy.translation.entity.Article">
         SELECT
-        id, r_id, r_long_title,
+        id, r_id, user_id, r_long_title,
         r_subheading, r_author, r_summary,
         r_content, create_time, last_edit_time,
         r_publish, r_status
@@ -27,7 +27,7 @@
     </select>
     <select id="queryArticleByArticleId" resultType="com.zzy.translation.entity.Article">
         SELECT
-        id, r_id, r_long_title,
+        id, r_id, user_id, r_long_title,
         r_subheading, r_author, r_summary,
         r_content, create_time, last_edit_time,
         r_publish, r_status

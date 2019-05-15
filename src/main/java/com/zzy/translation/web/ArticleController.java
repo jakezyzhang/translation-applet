@@ -33,8 +33,9 @@ public class ArticleController {
         sb.append(new Date().getTime());
         String rId = MD5.stringMD5(sb.toString());
         article.setrId(rId);
-        User loginUser = (User) request.getSession().getAttribute("loginUser");
+        User loginUser = (User) request.getSession(false).getAttribute("loginUser");
         article.setrAuthor(loginUser.getUserName());
+        article.setUserId(loginUser.getUserId());
         boolean flag = articleService.addArticle(article);
         modelMap.put("success", flag);
         return modelMap;
@@ -62,6 +63,9 @@ public class ArticleController {
     @RequestMapping(value = "/modifyarticlebystatus", method = RequestMethod.POST)
     private Map<String, Object>modifyArticleByStatus(Article article){
         Map<String, Object> modelMap = new HashMap<String, Object>();
+        User loginUser = (User) request.getSession(false).getAttribute("loginUser");
+        article.setrAuthor(loginUser.getUserName());
+        article.setUserId(loginUser.getUserId());
         modelMap.put("success", articleService.modifyArticleByStatus(article));
         return modelMap;
     }
@@ -69,6 +73,9 @@ public class ArticleController {
     @RequestMapping(value = "/modifyarticle", method = RequestMethod.POST)
     private Map<String, Object>modifyArticle( Article article){
         Map<String, Object>modelMap = new HashMap<String, Object>();
+        User loginUser = (User) request.getSession(false).getAttribute("loginUser");
+        article.setrAuthor(loginUser.getUserName());
+        article.setUserId(loginUser.getUserId());
         modelMap.put("success", articleService.modifyArticle(article));
         return modelMap;
     }

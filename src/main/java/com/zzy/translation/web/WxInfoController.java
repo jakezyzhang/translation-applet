@@ -4,10 +4,7 @@ import com.zzy.translation.config.session.MySessionContext;
 import com.zzy.translation.entity.WxInfo;
 import com.zzy.translation.service.WxInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,8 +19,8 @@ public class WxInfoController {
     @Autowired
     private HttpServletRequest request;
 
-    @RequestMapping(value = "/getopenid", method = RequestMethod.GET)
-    private Map<String, Object> getOpenId(WxInfo wxInfo, @CookieValue("code") String code){
+    @RequestMapping(value = "/getopenid", method = RequestMethod.POST)
+    private Map<String, Object> getOpenId(@RequestBody WxInfo wxInfo){
         Map<String, Object> modelMap = new HashMap<String, Object>();
         String openId = wxInfoService.getOpenIdByWxInfo(wxInfo);
         wxInfo.setOpenId(openId);

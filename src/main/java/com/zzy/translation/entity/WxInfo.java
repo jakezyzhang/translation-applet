@@ -5,14 +5,14 @@ public class WxInfo {
     private String secret;
     private String code;
     private String openId;
-    private String SessionId;
+    private String sessionId;
 
     public String getSessionId() {
-        return SessionId;
+        return sessionId;
     }
 
     public void setSessionId(String sessionId) {
-        SessionId = sessionId;
+        this.sessionId = sessionId;
     }
 
     public String getOpenId() {
