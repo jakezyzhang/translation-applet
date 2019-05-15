@@ -20,18 +20,20 @@ Page({
     scrollHeight: 0,
     transSrc: undefined,
     transDst: undefined,
-    kquery: undefined
+    kquery: undefined,
+    scrollTop: 100,
+    logs:undefined,
+    word:undefined
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options.active);
     let isIphoneX = app.globalData.isIphoneX;
     this.setData({
       isIphoneX: isIphoneX,
-      active: options.active
+      // active: options.active
     })
     this.computeScrollViewHeight()
 
@@ -132,7 +134,7 @@ Page({
   },
   openAlert: function() {
     wx.showModal({
-      content: '弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内',
+      content: '这是一款能够识别源语言的翻译小程序只要在输入框中输入想要翻译的内容，然后选择目标语言。',
       showCancel: false,
       success: function(res) {
         if (res.confirm) {
@@ -142,6 +144,14 @@ Page({
     });
   },
   formSubmit(e) {
+    var timestamp=Date.parse(new Date());
+    //返回当前时间毫秒数
+    timestamp = timestamp / 1000;
+    //获取当前时间
+    var n=timestamp*1000;
+    var date = new Date(n)
+    var h = date.getHours();
+    var m = date.getMinutes();
     var that = this
     var kword = that.trim(e.detail.value.word)
     that.data.kquery = kword
@@ -163,10 +173,13 @@ Page({
         'content-type': 'application/json'
       },
       success: function(res) {
-        console.log(res.data.src)
+        console.log(res.data)
         that.data.list.push(res.data)
         that.setData({
           list: that.data.list,
+          scrollTop: that.data.scrollTop + 100,
+          logs: h + ":" + m,
+          word:''
         })
         wx.request({
           url: app.globalData.urlPath + '/Word/addword',

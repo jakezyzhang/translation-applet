@@ -2,7 +2,7 @@ App({
   globalData: {
     isIphoneX: false,
     userInfo: null,
-    urlPath: "https://www.zyaiyy.cn/translation",
+    urlPath: "http://localhost:8086/translation",
     about: '此项目长期维护，如果有需要的可以在github自行下载，感觉还不错可以给作者star',
     openid: undefined,
     unionid: undefined,
@@ -40,10 +40,9 @@ App({
             data: {
               code: res.code
             },
-            method: 'GET',
+            method: 'POST',
             header: {
               'content-type': 'application/json',
-              'Cookie': 'code=' + res.code
             },
             success: function (res) {
               console.log(res.data.WxInfo.sessionId)
@@ -51,6 +50,8 @@ App({
               that.globalData.sessionid = res.data.WxInfo.sessionId
             }
           })
+        } else {
+          console.log('登录失败！' + res.errMsg)
         }
       }
     })

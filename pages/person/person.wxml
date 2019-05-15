@@ -30,12 +30,12 @@
         </navigator>
       </view>
     </view>
-    <view class="cu-item {{menuArrow?'arrow':''}}">
+    <!-- <view class="cu-item {{menuArrow?'arrow':''}}">
       <navigator class="content" hover-class="none" url="../translation/index" open-type="redirect">
         <image src="/package/icons/browse.png" class="png" mode="aspectFit"></image>
         <text class="text-grey">最近浏览</text>
       </navigator>
-    </view>
+    </view> -->
     <view class="cu-item {{menuArrow?'arrow':''}}">
       <button class="cu-btn content" open-type="contact">
         <text class="icon-btn text-olive"></text>

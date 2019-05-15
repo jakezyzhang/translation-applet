@@ -23,7 +23,7 @@
   </view>
 
   <!-- 翻译结果框 -->
-  <scroll-view scroll-y="true" style='height: {{scrollHeight + "px"}}'>
+  <scroll-view scroll-y="true" style='height: {{scrollHeight + "px"}}' scroll-top="{{scrollTop}}">
     <view wx:for="{{list}}" wx:key="" class='cu-item'>
       <view class="cu-chat">
         <view class="cu-item self">
@@ -39,7 +39,7 @@
               <text>{{item.dst}}</text>
             </view>
           </view>
-          <view class="date "> 13:23</view>
+          <view class="date"> {{logs}}</view>
         </view>
       </view>
     </view>
