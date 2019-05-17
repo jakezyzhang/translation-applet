@@ -42,10 +42,11 @@ public class WordServiceImpl implements WordService {
     public boolean addWord(Word word) {
         if (word.getOpenId() != null && !"".equals(word.getOpenId())){
 //            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-            word.setIsColletion(0);
+            SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm:ss");
+            word.setCreateTime(df.format(new Date()));
+            word.setLastEditTime(df.format(new Date()));
+            word.setIsCollection(0);
             word.setIsDelete(0);
-            word.setCreateTime(new Date());
-            word.setLastEditTime(new Date());
             String[] fromArr = {"auto", "zh", "en", "fra", "jp", "kor"};
             String[] toArr = {"zh", "en", "fra", "jp", "kor"};
             String from = fromArr[Integer.parseInt(word.getFromWord())];
@@ -90,7 +91,8 @@ public class WordServiceImpl implements WordService {
     @Override
     public boolean modifyWithCollection(Word word) {
         if (word.getWordId() != null && !"".equals(word.getWordId())){
-//            word.setLastEditTime(new Date());
+            SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm:ss");
+            word.setLastEditTime(df.format(new Date()));
             try {
                 int effectedNum = wordDao.updateWithCollection(word);
                 if (effectedNum > 0){
@@ -109,7 +111,8 @@ public class WordServiceImpl implements WordService {
     @Override
     public boolean modifyWithDelete(Word word) {
         if (word.getWordId() != null && !"".equals(word.getWordId())){
-//            word.setLastEditTime(new Date());
+            SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm:ss");
+            word.setLastEditTime(df.format(new Date()));
             try {
                 int effectedNum = wordDao.updateWithDelete(word);
                 if (effectedNum > 0){

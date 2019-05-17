@@ -132,7 +132,20 @@
         });
         // 退出
         function logout() {
-            window.location.href = "login.html";
+            $.ajax({
+                url: "http://localhost:8086/translation/User/logout",
+                data: {},
+                type: "GET",
+                success: function(data) {
+                    // alert(data['success'])
+                    console.log(data.success);
+                    $(window).attr("location","login");
+                },
+                error: function(err) {
+                    layer.msg("发生错误,刷新后重试");
+                    return;
+                }
+            });
         }
     </script>
 </body>

@@ -59,7 +59,27 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean modifyUser(User user) {
-        return false;
+        if (user.getUserId() != null && !"".equals(user.getUserId())){
+            SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm");
+            user.setCreateTime(df.format(new Date()));
+            StringBuilder sPwd = new StringBuilder();
+            sPwd.append(user.getPassWord());
+            sPwd.append(SIGN);
+            user.setPassWord(MD5.stringMD5(sPwd.toString()));
+            try {
+                int effectedNum = userDao.updateUser(user);
+                if (effectedNum > 0){
+                    return true;
+                }else {
+                    throw new RuntimeException("更新用户失败！");
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("更新用户失败！" + e.getMessage());
+            }
+        }else {
+            throw new RuntimeException("用户Id不能为空！");
+        }
+
     }
 
     @Override
@@ -90,7 +110,7 @@ public class UserServiceImpl implements UserService {
                     throw new RuntimeException("账号或者密码输入有误！");
                 }
             } catch (Exception e) {
-                throw new RuntimeException("账号或者密码输入有误！" + e.getMessage());
+                throw new RuntimeException("登录失败！" + e.getMessage());
             }
         }else {
             throw new RuntimeException("账号不能为空！");

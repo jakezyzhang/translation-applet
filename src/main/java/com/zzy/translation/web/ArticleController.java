@@ -25,14 +25,6 @@ public class ArticleController {
     @RequestMapping(value = "/addarticle", method = RequestMethod.POST)
     private Map<String, Object> addArticle(Article article){
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        String title = article.getrLongTitle();
-        String subheading = article.getrSubheading();
-        StringBuilder sb = new StringBuilder();
-        sb.append(title);
-        sb.append(subheading);
-        sb.append(new Date().getTime());
-        String rId = MD5.stringMD5(sb.toString());
-        article.setrId(rId);
         User loginUser = (User) request.getSession(false).getAttribute("loginUser");
         article.setrAuthor(loginUser.getUserName());
         article.setUserId(loginUser.getUserId());
@@ -45,6 +37,18 @@ public class ArticleController {
     private Map<String, Object> queryArticle(){
         Map<String, Object> modelMap = new HashMap<String, Object>();
         List<Article> listArticle = articleService.queryArticle();
+        modelMap.put("data", listArticle);
+        modelMap.put("code", 0);
+        modelMap.put("msg", "");
+        modelMap.put("count", listArticle.size());
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/queryarticlebyuserid", method = RequestMethod.GET)
+    private Map<String, Object>queryArticleByUserId(){
+        User loginUser = (User) request.getSession(false).getAttribute("loginUser");
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        List<Article> listArticle = articleService.queryArticleByUserId(loginUser);
         modelMap.put("data", listArticle);
         modelMap.put("code", 0);
         modelMap.put("msg", "");
@@ -71,12 +75,23 @@ public class ArticleController {
     }
 
     @RequestMapping(value = "/modifyarticle", method = RequestMethod.POST)
-    private Map<String, Object>modifyArticle( Article article){
+    private Map<String, Object>modifyArticle(Article article){
         Map<String, Object>modelMap = new HashMap<String, Object>();
         User loginUser = (User) request.getSession(false).getAttribute("loginUser");
+        System.out.println(loginUser);
         article.setrAuthor(loginUser.getUserName());
         article.setUserId(loginUser.getUserId());
+//        System.out.println(loginUser.getUserId());
         modelMap.put("success", articleService.modifyArticle(article));
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/checkPower", method = RequestMethod.GET)
+    private Map<String, Object> checkPower(){
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        User loginUser = (User) request.getSession(false).getAttribute("loginUser");
+        boolean flag = articleService.checkPower(loginUser);
+        modelMap.put("success", flag);
         return modelMap;
     }
 }

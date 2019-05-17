@@ -1,6 +1,7 @@
 package com.zzy.translation.service;
 
 import com.zzy.translation.entity.Article;
+import com.zzy.translation.entity.User;
 
 import java.util.List;
 
@@ -39,4 +40,18 @@ public interface ArticleService {
      * @return
      */
     boolean modifyArticle(Article article);
+
+    /**
+     * 根据user_id字段列出新闻列表
+     * @param user
+     * @return
+     */
+    List<Article> queryArticleByUserId(User user);
+
+    /**
+     * 判断用户的权限能够删除和修改新闻
+     * @param user
+     * @return
+     */
+    boolean checkPower(User user);
 }

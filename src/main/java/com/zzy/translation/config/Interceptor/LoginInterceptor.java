@@ -1,6 +1,6 @@
 package com.zzy.translation.config.Interceptor;
 
-import com.zzy.translation.config.session.MySessionContext;
+
 import com.zzy.translation.entity.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

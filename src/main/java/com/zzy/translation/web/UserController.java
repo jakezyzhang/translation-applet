@@ -58,12 +58,32 @@ public class UserController {
         return modelMap;
     }
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public Map<String, Object>logOut(){
+    private Map<String, Object>logOut(){
         Map<String, Object>modelMap = new HashMap<String, Object>();
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         session.invalidate();
-        modelMap.put("sessionId", session.getId());
+        modelMap.put("success", true);
         return modelMap;
     }
 
+    @RequestMapping(value = "/queryuserbyuserid", method = RequestMethod.GET)
+    private Map<String, Object>queryUserByUserId(){
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        //TODO
+//        User loginUser = (User) request.getSession(false).getAttribute("loginUser");
+        User user = userService.getUserByUserId("e3c0c0ad585a3264b111b3e788213654");
+        modelMap.put("user", user);
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/modifyuser", method = RequestMethod.POST)
+    private Map<String, Object> modifyUser(User user){
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        //TODO
+        //        User loginUser = (User) request.getSession(false).getAttribute("loginUser");
+        user.setUserId("e3c0c0ad585a3264b111b3e788213654");
+        boolean flag = userService.modifyUser(user);
+        modelMap.put("success", flag);
+        return modelMap;
+    }
 }

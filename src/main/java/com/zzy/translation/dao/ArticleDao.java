@@ -1,6 +1,7 @@
 package com.zzy.translation.dao;
 
 import com.zzy.translation.entity.Article;
+import com.zzy.translation.entity.User;
 
 import java.util.List;
 
@@ -13,10 +14,10 @@ public interface ArticleDao {
 
     /**
      * 根据userId列出所有的文章
-     * @param userId
+     * @param user
      * @return
      */
-    List<Article> queryArticleByUserId(String userId);
+    List<Article> queryArticleByUserId(User user);
 
     /**
      * 根据r_id字段查询文章信息

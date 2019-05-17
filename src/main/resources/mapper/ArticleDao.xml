@@ -22,6 +22,8 @@
         FROM tb_article
         WHERE
         r_status='0'
+        AND
+        r_publish='1'
         ORDER BY last_edit_time
         DESC
     </select>
@@ -34,6 +36,18 @@
         FROM tb_article
         WHERE
         r_id = #{rid}
+    </select>
+    <select id="queryArticleByUserId" resultType="com.zzy.translation.entity.Article">
+        SELECT
+        id, r_id, user_id, r_long_title,
+        r_subheading, r_author, r_summary,
+        r_content, create_time, last_edit_time,
+        r_publish, r_status
+        FROM tb_article
+        WHERE
+        user_id = #{userId}
+        AND
+        r_status = 0
     </select>
     <update id="updateArticleByStatus" parameterType="com.zzy.translation.entity.Article">
         UPDATE tb_article

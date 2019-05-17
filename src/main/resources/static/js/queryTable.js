@@ -5,7 +5,7 @@ layui.use(['table', 'jquery'], function() {
 	
 	table.render({
 		elem: '#reg_data_table',
-		url: 'http://localhost:8086/translation/Article/queryArticle',
+		url: 'http://localhost:8086/translation/Article/queryarticlebyuserid',
 		title: '新闻列表',
 		cols: [
 			[{
@@ -56,22 +56,51 @@ layui.use(['table', 'jquery'], function() {
 			layer.confirm('确认删除？', function(index) {
 				// alert('odata['rid']')
 				$.ajax({
-					url: "http://localhost:8086/translation/Article/modifyarticlebystatus",
-					data: {
-						rId: obj.data['rId'],
-						rStatus: 1
-					},
-					type: "POST"
-						// , dataType: "json"
-						,
+					url: "http://localhost:8086/translation/Article/checkPower",
+					type: "GET",
 					success: function(data) {
 						// alert(data['success'])
-						if (data['success'] == true) {
-							layer.msg("已删除");
-							obj.del();
-						} else {
-							layer.msg("删除失败")
-							return;
+						console.log(data.success);
+						if(data.success == true){
+							$.ajax({
+								url: "http://localhost:8086/translation/Article/modifyarticlebystatus",
+								data: {
+									rId: obj.data['rId'],
+									rStatus: 1
+								},
+								type: "POST"
+								// , dataType: "json"
+								,
+								success: function(data) {
+									// alert(data['success'])
+									if (data['success'] == true) {
+										layer.msg("已删除");
+										obj.del();
+									} else {
+										layer.msg("删除失败")
+										return;
+									}
+
+								},
+								error: function(err) {
+									layer.msg("发生错误,刷新后重试");
+									return;
+								}
+							});
+						}else {
+							layer.open({
+								type: 1,
+								offset: 'auto',
+								content: '<div style="padding: 20px 100px;">' + data.errMsg + '</div>',
+								btn: '关闭全部',
+								btnAlign: 'c' ,
+								shade: 0 ,
+								yes: function() {
+									// layer.closeAll();
+									$(window).attr("location","queryTable");
+								}
+							});
+
 						}
 
 					},

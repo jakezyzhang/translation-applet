@@ -13,14 +13,14 @@
         #{phone}, #{gender}, #{createTime}, #{lastEditTime})
     </insert>
     <select id="queryUserByUserName" resultType="com.zzy.translation.entity.User">
-        SELECT user_id, power, user_name, pass_word, nick_name,
+        SELECT id, user_id, power, user_name, pass_word, nick_name,
         phone, gender, create_time, last_edit_time
         FROM tb_user
         WHERE
         user_name = #{userName}
     </select>
     <select id="queryUserByUser" resultType="com.zzy.translation.entity.User">
-        SELECT user_id, power, user_name, pass_word, nick_name,
+        SELECT id, user_id, power, user_name, pass_word, nick_name,
         phone, gender, create_time, last_edit_time
         FROM tb_user
         WHERE
@@ -33,4 +33,26 @@
         WHERE
         user_name = #{userName}
     </select>
+    <select id="queryUserByUserId" resultType="com.zzy.translation.entity.User">
+        SELECT id, user_id, power, user_name, pass_word, nick_name,
+        phone, gender, create_time, last_edit_time
+        FROM tb_user
+        WHERE
+        user_id = #{userId}
+    </select>
+    <update id="updateUser" parameterType="com.zzy.translation.entity.User">
+        UPDATE tb_user
+        <set>
+            <if test="userId!=null">user_id=#{userId},</if>
+            <if test="power!=null">power=#{power},</if>
+            <if test="userName!=null">user_name=#{userName},</if>
+            <if test="passWord!=null">pass_word=#{passWord},</if>
+            <if test="nickName!=null">nick_name=#{nickName},</if>
+            <if test="phone!=null">phone=#{phone},</if>
+            <if test="gender!=null">gender=#{gender},</if>
+            <if test="createTime!=null">create_time=#{createTime},</if>
+            <if test="lastEditTime!=null">last_edit_time=#{lastEditTime}</if>
+        </set>
+        WHERE user_id=#{userId}
+    </update>
 </mapper>

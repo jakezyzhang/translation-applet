@@ -12,26 +12,12 @@ public class Word {
     private String fromWord;
     private String toWord;
     private String statusCode;
-    private Date createTime;
-    private Date lastEditTime;
+    private String  createTime;
+    private String lastEditTime;
     private int isCollection;
     private int isDelete;
 
-    public Date getCreateTime() {
-        return createTime;
-    }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getLastEditTime() {
-        return lastEditTime;
-    }
-
-    public void setLastEditTime(Date lastEditTime) {
-        this.lastEditTime = lastEditTime;
-    }
 
     public int getId() {
         return id;
@@ -105,12 +91,28 @@ public class Word {
         this.statusCode = statusCode;
     }
 
-    public int getIsCollection() {
-        return isCollection;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setIsColletion(int isColletion) {
-        this.isCollection = isColletion;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getLastEditTime() {
+        return lastEditTime;
+    }
+
+    public void setLastEditTime(String lastEditTime) {
+        this.lastEditTime = lastEditTime;
+    }
+
+    public void setIsCollection(int isCollection) {
+        this.isCollection = isCollection;
+    }
+
+    public int getIsCollection() {
+        return isCollection;
     }
 
     public int getIsDelete() {

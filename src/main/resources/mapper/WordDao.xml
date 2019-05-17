@@ -27,7 +27,7 @@
         open_id=#{OpenId}
         AND
         is_delete='0'
-        ORDER BY create_time
+        ORDER BY last_edit_time
         DESC
     </select>
     <select id="queryWordByWordId" resultType="com.zzy.translation.entity.Word">
@@ -49,13 +49,13 @@
         open_id = #{openId}
         AND
         is_collection = '1'
-        ORDER BY create_time
+        ORDER BY last_edit_time
         DESC
     </select>
     <update id="updateWithCollection" parameterType="com.zzy.translation.entity.Word">
         UPDATE tb_word
         <set>
-            <if test="isCollection!=null">is_collection=#{isCollection}</if>
+            <if test="isCollection!=null">is_collection=#{isCollection},</if>
             <if test="lastEditTime!=null">last_edit_time=#{lastEditTime}</if>
         </set>
         WHERE word_id = #{wordId}
@@ -63,7 +63,7 @@
     <update id="updateWithDelete" parameterType="com.zzy.translation.entity.Word">
         UPDATE tb_word
         <set>
-            <if test="isDelete!=null">is_delete=#{isDelete}</if>
+            <if test="isDelete!=null">is_delete=#{isDelete},</if>
             <if test="lastEditTime!=null">last_edit_time=#{lastEditTime}</if>
         </set>
         WHERE word_id = #{wordId}
