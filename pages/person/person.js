@@ -17,6 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(app.globalData.sessionid)
     var that = this;
     that.setData({
       active: options.active
@@ -28,7 +29,7 @@ Page({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
             success(res) {
-              console.log(res.encryptedData)
+              // console.log(res.encryptedData)
               // that.queryWxUserInfo();
               that.setData({
                 nickName: res.userInfo.nickName,
@@ -151,6 +152,7 @@ Page({
     }
   },
   queryWxUserInfo: function() {
+    var that = this;
     console.log(app.globalData.openid)
     wx.request({
       url: app.globalData.urlPath + '/WxUser/userbyopenid',
@@ -162,8 +164,23 @@ Page({
       },
       success: function(res) {
         console.log(res.data)
-        app.globalData.flag = res.data.success
-      }
+        if(res.data.success == true){
+          app.globalData.flag = res.data.success
+        }
+        // else{
+        //   wx.showModal({
+        //     content: '获取用户信息失败请检查网络，点击确定刷新小程序',
+        //     showCancel: false,
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         wx.redirectTo({
+        //           url: '../person/person?active=' + 2,
+        //         })
+        //       }
+        //     }
+        //   });
+        // }
+      },
     })
   },
 })

@@ -141,6 +141,11 @@ Page({
       },
       success: function (res) {
         console.log(res.data)
+        wx.showToast({
+          title: '以删除',
+          icon: 'success',
+          duration: 3000
+        });
       }
     })
   }

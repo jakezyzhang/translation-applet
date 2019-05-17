@@ -29,14 +29,14 @@
         <view class="cu-item self">
           <view class="main">
             <view class="content bg-green shadow">
-              <text>{{item.src}}</text>
+              <text selectable="true">{{item.src}}</text>
             </view>
           </view>
         </view>
         <view class="cu-item">
           <view class="main">
             <view class="content shadow">
-              <text>{{item.dst}}</text>
+              <text selectable="true">{{item.dst}}</text>
             </view>
           </view>
           <view class="date"> {{logs}}</view>

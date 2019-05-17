@@ -2,13 +2,14 @@ App({
   globalData: {
     isIphoneX: false,
     userInfo: null,
-    urlPath: "http://localhost:8086/translation",
+    urlPath: "https://www.zyaiyy.cn/translation",
     about: '此项目长期维护，如果有需要的可以在github自行下载，感觉还不错可以给作者star',
     openid: undefined,
     unionid: undefined,
     session_key: undefined,
     flag: undefined,
-    sessionid:undefined
+    sessionid:undefined,
+    code:undefined,
   },
   onShow: function() {
     let that = this;
@@ -34,7 +35,7 @@ App({
       success: function(res) {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
-          var code = res.code;
+          that.globalData.code = res.code;
           wx.request({
             url: that.globalData.urlPath + '/WxInfo/getopenid',
             data: {
@@ -42,12 +43,40 @@ App({
             },
             method: 'POST',
             header: {
-              'content-type': 'application/json',
+              'content-type': 'application/json'
             },
             success: function (res) {
               console.log(res.data.WxInfo.sessionId)
               that.globalData.openid = res.data.WxInfo.openId
               that.globalData.sessionid = res.data.WxInfo.sessionId
+            },
+            fail: function(err){
+              wx.showModal({
+                content: '连接小程序失败，请检查您的网络状况',
+                showCancel: false,
+                success: function (res) {
+                  if (res.confirm) {
+                    wx.request({
+                      url: that.globalData.urlPath + '/WxInfo/getopenid',
+                      data: {
+                        code: that.globalData.code
+                      },
+                      method: 'POST',
+                      header: {
+                        'content-type': 'application/json'
+                      },
+                      success: function (res) {
+                        console.log(res.data.WxInfo.sessionId)
+                        that.globalData.openid = res.data.WxInfo.openId
+                        that.globalData.sessionid = res.data.WxInfo.sessionId
+                      },
+                      fail: function(err){
+                        that.onLaunch()
+                      }
+                    })
+                  }
+                }
+              });
             }
           })
         } else {

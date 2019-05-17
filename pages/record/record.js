@@ -162,12 +162,13 @@ Page({
       }
     })
   },
-  onColletion: function(e) {
+  onCollection: function(e) {
     console.log(e.target.dataset.wordid)
     wx.request({
       url: app.globalData.urlPath + '/Word/modifywithcollection',
       data: {
-        isColletion: 1,
+        //TODO 要改成isCollection
+        isCollection: 1,
         wordId: e.target.dataset.wordid
       },
       method: 'GET',

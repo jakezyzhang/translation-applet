@@ -177,7 +177,7 @@ Page({
         that.data.list.push(res.data)
         that.setData({
           list: that.data.list,
-          scrollTop: that.data.scrollTop + 100,
+          scrollTop: that.data.scrollTop + 1000,
           logs: h + ":" + m,
           word:''
         })
