@@ -14,7 +14,7 @@ layui.use(['jquery', 'form', 'layer'], function() {
 			},
 			success: function(data) {
 				if (data.success == true) {
-					$(window).attr("location", "queryTable.html");
+					$(window).attr("location", "queryTable");
 				} else {
 					layer.open({
 						type: 1,

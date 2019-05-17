@@ -58,13 +58,13 @@
 					<dd class="list_dd">
 						<ul>
 							<li class="list_li">
-								<a class="list_a" href="queryTable.html">菜单管理</a>
+								<a class="list_a" href="queryTable">菜单管理</a>
 							</li>
 							<li class="list_li">
-								<a class="list_a" href="increaseOrEditor.html">添加文章</a>
+								<a class="list_a" href="increaseOrEditor">添加文章</a>
 							</li>
 							<li class="list_li">
-								<a class="list_a" href="fileTree.html">角色管理</a>
+								<a class="list_a" href="fileTree">角色管理</a>
 							</li>
 						</ul>
 					</dd>
@@ -76,7 +76,7 @@
 			</div>
 			<div class="">
 				<script type="text/html" id="bar">
-					<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+					<a onclick="onChangeArticle" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" >删除</a>
 					<a class="layui-btn layui-btn-xs" lay-event="edit" >编辑</a>
 				</script>
 			</div>
@@ -100,7 +100,21 @@
 			 * 退出登录
 			 */
 			function logout() {
-				window.location.href = "login.html";
+				// window.location.href = "login";
+				$.ajax({
+					url: "http://localhost:8086/translation/User/logout",
+					data: {},
+					type: "GET",
+					success: function(data) {
+						// alert(data['success'])
+						console.log(data.success);
+						$(window).attr("location","login");
+					},
+					error: function(err) {
+						layer.msg("发生错误,刷新后重试");
+						return;
+					}
+				});
 			};
 			/**
 			 * 此方法为分页插件提供方法 
@@ -145,11 +159,34 @@
 			}
 
 			function addfun() {
-				window.location.href = "increaseOrEditor.html";
+				window.location.href = "increaseOrEditor";
 			}
 
 			function editfun() {
-				window.location.href = "increaseOrEditor.html";
+				window.location.href = "increaseOrEditor";
+			}
+			/**
+			 * 新闻点击编辑之前判断用户的权限
+			 *
+			 */
+			function onChangeArticle(){
+				$.ajax({
+					url: "http://localhost:8086/translation/Article/checkPower",
+					data: {},
+					type: "GET",
+					success: function(data) {
+						// alert(data['success'])
+						console.log(data.success);
+						if(data.success == false){
+							$(window).attr("location","queryTable");
+						}
+
+					},
+					error: function(err) {
+						layer.msg("发生错误,刷新后重试");
+						return;
+					}
+				});
 			}
 		</script>
 	</body>

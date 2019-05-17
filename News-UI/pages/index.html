@@ -55,13 +55,13 @@
 					<dd class="list_dd">
 						<ul>
 							<li class="list_li">
-								<a class="list_a" href="queryTable.html">菜单管理</a>
+								<a class="list_a" href="queryTable">菜单管理</a>
 							</li>
 							<li class="list_li">
-								<a class="list_a" href="increaseOrEditor.html">增加编辑</a>
+								<a class="list_a" href="increaseOrEditor">增加编辑</a>
 							</li>
 							<li class="list_li">
-								<a class="list_a" href="fileTree.html">角色管理</a>
+								<a class="list_a" href="fileTree">角色管理</a>
 							</li>
 							<!-- <li class="list_li">
                             <a class="list_a" href="error.html">错误页面</a>
@@ -106,7 +106,7 @@
 				<div class="mainrightbox">
 					<!-- 路径导航 -->
 					<ol class="breadcrumb">
-						<li><a href="index.html">首页</a></li>
+						<li><a href="index">首页</a></li>
 					</ol>
 					<!-- 主体部分 -->
 					<div class="main_box">
@@ -124,6 +124,8 @@
 
 		<script>
 			// 此方法为切换左边菜单的js文件
+
+
 			$(".list_dt").on("click", function() {
 				$('.list_dd').stop();
 				$(this).siblings("dt").removeAttr("id");
@@ -136,32 +138,19 @@
 			// 退出
 			function logout() {
 				$.ajax({
-					url: 'http://localhost:8086/translation/User/loginUser',
-					type: "POST",
-					cache: false,
-					data: {
-						"userName": data.field.username,
-						"passWord": data.field.password
-					},
+					url: "http://localhost:8086/translation/User/logout",
+					data: {},
+					type: "GET",
 					success: function(data) {
-						if (data.success == true) {
-							$(window).attr("location", "queryTable.html");
-						} else {
-							layer.open({
-								type: 1,
-								offset: 'auto',
-								content: '<div style="padding: 20px 100px;">' + data.errMsg + '</div>',
-								btn: '关闭全部',
-								btnAlign: 'c' ,
-								shade: 0 ,
-								yes: function() {
-									layer.closeAll();
-								}
-							});
-						}
+						// alert(data['success'])
+						console.log(data.success);
+						$(window).attr("location","login");
+					},
+					error: function(err) {
+						layer.msg("发生错误,刷新后重试");
+						return;
 					}
 				});
-				window.location.href = "login.html";
 			}
 		</script>
 	</body>

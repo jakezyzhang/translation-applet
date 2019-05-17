@@ -49,7 +49,7 @@ layui.use(['jquery', 'form', 'layer'], function() {
 						btnAlign: 'c' ,
 						shade: 0 ,
 						yes: function() {
-							$(window).attr("location","login.html");
+							$(window).attr("location","login");
 						}
 					});
 					
